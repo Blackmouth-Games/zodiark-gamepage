@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -42,7 +41,6 @@ export const LanguageSelector = () => {
         <SelectValue>
           <span className="font-semibold tracking-wide">{currentLang?.short || 'EN'}</span>
         </SelectValue>
-        <ChevronDown className="w-4 h-4 ml-1 opacity-70" />
       </SelectTrigger>
       <SelectContent className="bg-card/95 backdrop-blur-md border-border">
         {languages.map((lang) => (

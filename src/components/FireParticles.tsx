@@ -30,7 +30,7 @@ export const FireParticles = () => {
     window.addEventListener('resize', resize);
 
     const particles: Particle[] = [];
-    const particleCount = 80; // Más partículas
+    const particleCount = 40; // Reducido para mejor rendimiento
 
     // Create particles
     for (let i = 0; i < particleCount; i++) {
@@ -41,17 +41,17 @@ export const FireParticles = () => {
       return {
         x: Math.random() * canvas!.width,
         y: canvas!.height + 10,
-        vx: (Math.random() - 0.5) * 0.8, // Más movimiento horizontal
-        vy: -Math.random() * 2 - 0.8, // Más velocidad vertical
-        size: Math.random() * 4 + 1, // Partículas más grandes
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: -Math.random() * 1.8 - 0.6,
+        size: Math.random() * 3 + 1,
         life: 0,
-        maxLife: Math.random() * 120 + 80, // Vida más variable
-        hue: Math.random() * 40 + 15, // Rango más amplio de naranjas (15-55)
+        maxLife: Math.random() * 100 + 80,
+        hue: Math.random() * 35 + 20, // Naranja-amarillo (20-55)
       };
     }
 
     function animate() {
-      ctx!.fillStyle = 'rgba(0, 0, 0, 0.03)'; // Fade más suave
+      ctx!.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
 
       particles.forEach((particle, index) => {

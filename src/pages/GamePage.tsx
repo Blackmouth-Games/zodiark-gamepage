@@ -72,13 +72,13 @@ export const GamePage = () => {
       {/* Fire Particles */}
       <FireParticles />
       
-      {/* Background Hero Art - más visible */}
+      {/* Background Hero Art - bien visible */}
       <div 
-        className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat z-0"
+        className="absolute inset-0 opacity-40 bg-cover bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url(${heroArt})` }}
       />
-      {/* Overlay muy sutil para mantener legibilidad sin morado fuerte */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-background/90 z-0" />
+      {/* Overlay muy ligero */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-background/70 z-0" />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
