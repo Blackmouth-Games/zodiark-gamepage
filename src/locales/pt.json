@@ -1,0 +1,48 @@
+{
+  "game": {
+    "headline": "Bem-vindo, Buscador Precoce",
+    "sub": "Reivindique sua recompensa e aguarde… Sua Jornada Cósmica está começando em…",
+    "cta": "Reivindicar Recompensa",
+    "loading": "Inicializando...",
+    "countdown": {
+      "days": "Dias",
+      "hours": "Horas",
+      "minutes": "Minutos"
+    }
+  },
+  "thank": {
+    "title_ok": "Parabéns, Buscador Precoce!",
+    "sub_ok": "Você reivindicou sua recompensa com sucesso.",
+    "title_error": "Algo deu errado",
+    "retry": "Tentar Novamente",
+    "granted": "Suas Recompensas",
+    "timeline_title": "O Que Vem a Seguir",
+    "timeline": {
+      "launch": {
+        "title": "Data de Lançamento",
+        "desc": "Os portais cósmicos se abrem"
+      },
+      "hatching": {
+        "title": "Evento de Eclosão",
+        "desc": "Seu Ovo Astral desperta"
+      },
+      "awakening": {
+        "title": "Fase de Despertar",
+        "desc": "Torne-se um Guardião"
+      }
+    }
+  },
+  "errors": {
+    "missing_tg": "Dados do Telegram não disponíveis. Por favor abra isso no bot do Telegram.",
+    "missing_params": "Dados obrigatórios ausentes. Por favor reabra o bot.",
+    "already_own_77": "Você já reivindicou esta recompensa.",
+    "generic": "Não conseguimos completar sua solicitação. Por favor tente novamente.",
+    "network": "Erro de rede. Por favor verifique sua conexão e tente novamente."
+  },
+  "community": {
+    "join": "Junte-se à Comunidade",
+    "telegram": "Grupo do Telegram",
+    "discord": "Servidor do Discord",
+    "x": "Seguir no X"
+  }
+}

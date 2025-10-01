@@ -1,0 +1,48 @@
+{
+  "game": {
+    "headline": "Bienvenido, Buscador Temprano",
+    "sub": "Reclama tu recompensa y espera… Tu Viaje Cósmico comienza en…",
+    "cta": "Reclamar Recompensa",
+    "loading": "Inicializando...",
+    "countdown": {
+      "days": "Días",
+      "hours": "Horas",
+      "minutes": "Minutos"
+    }
+  },
+  "thank": {
+    "title_ok": "¡Felicitaciones, Buscador Temprano!",
+    "sub_ok": "Has reclamado tu recompensa con éxito.",
+    "title_error": "Algo salió mal",
+    "retry": "Intentar de Nuevo",
+    "granted": "Tus Recompensas",
+    "timeline_title": "Qué Sigue",
+    "timeline": {
+      "launch": {
+        "title": "Fecha de Lanzamiento",
+        "desc": "Las puertas cósmicas se abren"
+      },
+      "hatching": {
+        "title": "Evento de Eclosión",
+        "desc": "Tu Huevo Astral despierta"
+      },
+      "awakening": {
+        "title": "Fase de Despertar",
+        "desc": "Conviértete en Guardián"
+      }
+    }
+  },
+  "errors": {
+    "missing_tg": "Datos de Telegram no disponibles. Por favor abre esto en el bot de Telegram.",
+    "missing_params": "Faltan datos requeridos. Por favor vuelve a abrir el bot.",
+    "already_own_77": "Ya reclamaste esta recompensa.",
+    "generic": "No pudimos completar tu solicitud. Por favor intenta de nuevo.",
+    "network": "Error de red. Por favor verifica tu conexión e intenta de nuevo."
+  },
+  "community": {
+    "join": "Únete a la Comunidad",
+    "telegram": "Grupo de Telegram",
+    "discord": "Servidor de Discord",
+    "x": "Seguir en X"
+  }
+}

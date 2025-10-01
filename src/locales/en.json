@@ -1,0 +1,48 @@
+{
+  "game": {
+    "headline": "Welcome, Early Seeker",
+    "sub": "Claim your reward and wait… Your Cosmic Journey is starting in…",
+    "cta": "Claim Reward",
+    "loading": "Initializing...",
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes"
+    }
+  },
+  "thank": {
+    "title_ok": "Congratulations, Early Seeker!",
+    "sub_ok": "You have claimed your reward successfully.",
+    "title_error": "Something went wrong",
+    "retry": "Try Again",
+    "granted": "Your Rewards",
+    "timeline_title": "What's Next",
+    "timeline": {
+      "launch": {
+        "title": "Launch Date",
+        "desc": "The cosmic gates open"
+      },
+      "hatching": {
+        "title": "Hatching Event",
+        "desc": "Your Astral Egg awakens"
+      },
+      "awakening": {
+        "title": "Awakening Phase",
+        "desc": "Become a Guardian"
+      }
+    }
+  },
+  "errors": {
+    "missing_tg": "Telegram data not available. Please open this in the Telegram bot.",
+    "missing_params": "Missing required data. Please reopen the bot.",
+    "already_own_77": "You already claimed this reward.",
+    "generic": "We couldn't complete your request. Please try again.",
+    "network": "Network error. Please check your connection and try again."
+  },
+  "community": {
+    "join": "Join the Community",
+    "telegram": "Telegram Group",
+    "discord": "Discord Server",
+    "x": "Follow on X"
+  }
+}
