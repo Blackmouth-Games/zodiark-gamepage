@@ -78,7 +78,7 @@ export const ThankPage = () => {
       <FireParticles />
       
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-background/60 to-background z-0" />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">

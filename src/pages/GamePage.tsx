@@ -74,10 +74,11 @@ export const GamePage = () => {
       
       {/* Background Hero Art - más visible */}
       <div 
-        className="absolute inset-0 opacity-25 bg-cover bg-center bg-no-repeat z-0"
+        className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url(${heroArt})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background z-0" />
+      {/* Overlay muy sutil para mantener legibilidad sin morado fuerte */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-background/90 z-0" />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
