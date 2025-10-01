@@ -108,17 +108,18 @@ export const GamePage = () => {
             <img src={zodiarkLogo} alt="Zodiark" className="h-24 sm:h-32 md:h-40 lg:h-48" />
           </div>
 
-          {/* Headline + Subtitle + Countdown integrados */}
+          {/* Headline + Countdown + Subtitle integrados */}
           <div className="text-center max-w-5xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-glow leading-tight">
               {t('game.headline')}
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8">
+            
+            {/* Countdown */}
+            <Countdown />
+            
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mt-8">
               {t('game.sub')}
             </p>
-            
-            {/* Countdown integrado */}
-            <Countdown />
           </div>
 
           {/* CTA */}
