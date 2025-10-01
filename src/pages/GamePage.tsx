@@ -72,23 +72,21 @@ export const GamePage = () => {
       {/* Fire Particles */}
       <FireParticles />
       
-      {/* Background Hero Art with vignette */}
+      {/* Background Hero Art - más visible */}
       <div 
-        className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat z-0"
+        className="absolute inset-0 opacity-25 bg-cover bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url(${heroArt})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-background/70 to-background z-0" />
-      {/* Vignette effect */}
-      <div className="absolute inset-0 z-0" style={{
-        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.8) 100%)'
-      }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background z-0" />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
-        {/* Header */}
-        <header className="p-4 sm:p-6 flex justify-between items-center">
+        {/* Header - Logo centrado, selector en esquina */}
+        <header className="p-4 sm:p-6 flex justify-center items-center relative">
           <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
-          <LanguageSelector />
+          <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
+            <LanguageSelector />
+          </div>
         </header>
 
         {/* Main Content */}
@@ -98,7 +96,7 @@ export const GamePage = () => {
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 text-white uppercase leading-tight tracking-tight drop-shadow-2xl">
               {t('game.headline')}
             </h1>
-            <p className="text-lg sm:text-2xl md:text-3xl text-white/90 font-medium">
+            <p className="text-lg sm:text-2xl text-white/90 font-medium">
               {t('game.sub')}
             </p>
           </div>
@@ -112,10 +110,7 @@ export const GamePage = () => {
               size="lg"
               onClick={handleClaimReward}
               disabled={isRedeeming}
-              className="w-full sm:w-auto px-12 bg-accent hover:bg-accent/90 text-accent-foreground font-black text-xl py-7 rounded-xl shadow-2xl transition-all transform hover:scale-105 uppercase tracking-wide"
-              style={{
-                boxShadow: '0 0 40px rgba(255, 163, 0, 0.6), 0 10px 30px rgba(0, 0, 0, 0.5)'
-              }}
+              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-lg py-6 rounded-xl glow-effect transition-all transform hover:scale-105"
             >
               {isRedeeming ? '...' : t('game.cta')}
             </Button>
