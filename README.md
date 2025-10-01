@@ -49,9 +49,19 @@ Create a `.env` file in the root directory:
 # Optional: Override launch date for testing (ISO 8601 format)
 # VITE_LAUNCH_OVERRIDE_ISO=2025-01-17T00:00:00+01:00
 
-# Optional: Enable dev mode features
-# VITE_ALLOW_DEV_MOCK=true
+# Optional: Enable test mode (prevents search engine indexing)
+# Set to "true" for preview/staging deployments
+VITE_TEST_MODE=false
 ```
+
+### Test Mode
+
+When `VITE_TEST_MODE=true`:
+- A red banner appears at the top indicating "TEST MODE"
+- `<meta name="robots" content="noindex, nofollow">` is added to prevent search engine indexing
+- Useful for Netlify preview deployments or staging environments
+
+**Important**: Always set `VITE_TEST_MODE=false` (or remove it) for production deployments.
 
 ## 🌐 Language Support
 

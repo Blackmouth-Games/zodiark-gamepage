@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Countdown } from '@/components/Countdown';
+import { FireParticles } from '@/components/FireParticles';
+import { LanguageSelector } from '@/components/LanguageSelector';
+import { TestModeBanner } from '@/components/TestModeBanner';
 import { Button } from '@/components/ui/button';
 import { getTelegramUser } from '@/telegram/telegram';
 import { callRedeemAPI, storeRedeemResult } from '@/utils/api';
@@ -63,18 +66,25 @@ export const GamePage = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* Test Mode Banner */}
+      <TestModeBanner />
+      
+      {/* Fire Particles */}
+      <FireParticles />
+      
       {/* Background Hero Art */}
       <div 
-        className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url(${heroArt})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-0" />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
         {/* Header */}
-        <header className="p-4 sm:p-6 flex justify-center">
-          <img src={zodiarkLogo} alt="Zodiark" className="h-12 sm:h-16" />
+        <header className="p-4 sm:p-6 flex justify-between items-center">
+          <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
+          <LanguageSelector />
         </header>
 
         {/* Main Content */}

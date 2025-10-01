@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { RewardStrip } from '@/components/RewardStrip';
 import { Timeline } from '@/components/Timeline';
 import { SocialLinks } from '@/components/SocialLinks';
+import { FireParticles } from '@/components/FireParticles';
+import { LanguageSelector } from '@/components/LanguageSelector';
+import { TestModeBanner } from '@/components/TestModeBanner';
 import { Button } from '@/components/ui/button';
 import { getAndClearRedeemResult, type RedeemResult } from '@/utils/api';
 import { trackEvent } from '@/utils/tracker';
@@ -68,14 +71,21 @@ export const ThankPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* Test Mode Banner */}
+      <TestModeBanner />
+      
+      {/* Fire Particles */}
+      <FireParticles />
+      
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background z-0" />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
         {/* Header */}
-        <header className="p-4 sm:p-6 flex justify-center">
-          <img src={zodiarkLogo} alt="Zodiark" className="h-12 sm:h-16" />
+        <header className="p-4 sm:p-6 flex justify-between items-center">
+          <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
+          <LanguageSelector />
         </header>
 
         {/* Main Content */}

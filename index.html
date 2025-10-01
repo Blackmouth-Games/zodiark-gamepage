@@ -7,6 +7,18 @@
     <meta name="description" content="Claim your early seeker reward and begin your cosmic journey in Zodiark: Astral Awakening." />
     <meta name="author" content="Zodiark Team" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <!-- Test Mode: Prevent search engine indexing when in test mode -->
+    <script>
+      // Check if test mode is enabled via environment variable
+      const isTestMode = '%VITE_TEST_MODE%' === 'true';
+      if (isTestMode) {
+        const meta = document.createElement('meta');
+        meta.name = 'robots';
+        meta.content = 'noindex, nofollow';
+        document.head.appendChild(meta);
+      }
+    </script>
 
     <meta property="og:title" content="Zodiark: Astral Awakening" />
     <meta property="og:description" content="Claim your early seeker reward and begin your cosmic journey." />
