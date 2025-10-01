@@ -94,12 +94,12 @@ export const GamePage = () => {
             <img src={zodiarkLogo} alt="Zodiark" className="h-24 sm:h-32 md:h-40 lg:h-48" />
           </div>
 
-          {/* Headline */}
-          <div className="text-center max-w-4xl">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black mb-6 text-white uppercase leading-tight tracking-tight drop-shadow-2xl">
+          {/* Headline - estilo del repo original */}
+          <div className="text-center max-w-5xl">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-10 text-glow leading-tight">
               {t('game.headline')}
             </h1>
-            <p className="text-base sm:text-xl text-white/90 font-medium">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground mb-10 md:mb-14 max-w-2xl mx-auto">
               {t('game.sub')}
             </p>
           </div>
