@@ -1,0 +1,48 @@
+{
+  "game": {
+    "headline": "Éveillez Votre Destin et Réclamez les Offres Limitées Pour Les Premiers",
+    "sub": "Votre Voyage Cosmique commence dans…",
+    "cta": "Réclamer Récompense",
+    "loading": "Initialisation...",
+    "countdown": {
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Minutes"
+    }
+  },
+  "thank": {
+    "title_ok": "Félicitations, Chercheur Précoce!",
+    "sub_ok": "Vous avez réclamé votre récompense avec succès.",
+    "title_error": "Quelque chose s'est mal passé",
+    "retry": "Réessayer",
+    "granted": "Vos Récompenses",
+    "timeline_title": "Quelle est la Suite",
+    "timeline": {
+      "launch": {
+        "title": "Date de Lancement",
+        "desc": "Les portes cosmiques s'ouvrent"
+      },
+      "hatching": {
+        "title": "Événement d'Éclosion",
+        "desc": "Votre Œuf Astral s'éveille"
+      },
+      "awakening": {
+        "title": "Phase d'Éveil",
+        "desc": "Devenez un Gardien"
+      }
+    }
+  },
+  "errors": {
+    "missing_tg": "Données Telegram non disponibles. Veuillez ouvrir ceci dans le bot Telegram.",
+    "missing_params": "Données requises manquantes. Veuillez rouvrir le bot.",
+    "already_own_77": "Vous avez déjà réclamé cette récompense.",
+    "generic": "Nous n'avons pas pu compléter votre demande. Veuillez réessayer.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion et réessayer."
+  },
+  "community": {
+    "join": "Rejoindre la Communauté",
+    "telegram": "Groupe Telegram",
+    "discord": "Serveur Discord",
+    "x": "Suivre sur X"
+  }
+}

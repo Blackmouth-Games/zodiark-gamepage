@@ -12,6 +12,7 @@ const languages = [
   { code: 'en', name: 'English', short: 'EN' },
   { code: 'es', name: 'Español', short: 'ES' },
   { code: 'pt', name: 'Português', short: 'PT' },
+  { code: 'fr', name: 'Français', short: 'FR' },
 ];
 
 export const LanguageSelector = () => {

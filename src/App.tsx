@@ -23,7 +23,7 @@ const LanguageRouter = () => {
     const params = new URLSearchParams(location.search);
     const langOverride = params.get('lang');
 
-    if (langOverride && ['en', 'es', 'pt'].includes(langOverride)) {
+    if (langOverride && ['en', 'es', 'pt', 'fr'].includes(langOverride)) {
       // Use override
       i18n.changeLanguage(langOverride);
       
@@ -39,7 +39,7 @@ const LanguageRouter = () => {
     i18n.changeLanguage(detectedLang);
 
     // If on root or non-lang route, redirect to detected lang
-    if (location.pathname === '/' || !location.pathname.match(/^\/(en|es|pt)/)) {
+    if (location.pathname === '/' || !location.pathname.match(/^\/(en|es|pt|fr)/)) {
       navigate(`/${detectedLang}`, { replace: true });
     }
   }, [location, navigate]);

@@ -2,7 +2,7 @@ interface FireParticlesProps {
   count?: number;
 }
 
-export const FireParticles = ({ count = 60 }: FireParticlesProps) => {
+export const FireParticles = ({ count = 100 }: FireParticlesProps) => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <div className="fire-sparks-container">
@@ -15,7 +15,7 @@ export const FireParticles = ({ count = 60 }: FireParticlesProps) => {
               bottom: `${Math.random() * -10}%`,
               animationDelay: `${Math.random() * 8}s`,
               animationDuration: `${6 + Math.random() * 6}s`,
-              ['--spark-size' as any]: `${4 + Math.random() * 6}px`
+              ['--spark-size' as any]: `${5 + Math.random() * 8}px` // Más grandes
             }}
           />
         ))}

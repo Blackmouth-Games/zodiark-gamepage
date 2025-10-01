@@ -96,10 +96,10 @@ export const GamePage = () => {
 
           {/* Headline */}
           <div className="text-center max-w-4xl">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 text-white uppercase leading-tight tracking-tight drop-shadow-2xl">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black mb-6 text-white uppercase leading-tight tracking-tight drop-shadow-2xl">
               {t('game.headline')}
             </h1>
-            <p className="text-lg sm:text-2xl text-white/90 font-medium">
+            <p className="text-base sm:text-xl text-white/90 font-medium">
               {t('game.sub')}
             </p>
           </div>

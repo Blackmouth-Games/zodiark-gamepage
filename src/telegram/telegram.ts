@@ -59,7 +59,7 @@ export const getTelegramUser = (): TelegramUser | null => {
 
 /**
  * Detect language from Telegram user data
- * Maps Telegram language codes to supported languages (en, es, pt)
+ * Maps Telegram language codes to supported languages (en, es, pt, fr)
  */
 export const detectLanguage = (): string => {
   const user = getTelegramUser();
@@ -73,6 +73,7 @@ export const detectLanguage = (): string => {
   // Map Telegram language codes to supported languages
   if (langCode.startsWith('es')) return 'es';
   if (langCode.startsWith('pt')) return 'pt';
+  if (langCode.startsWith('fr')) return 'fr';
   return 'en'; // Default for all other languages
 };
 
