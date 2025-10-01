@@ -88,24 +88,24 @@ export const GamePage = () => {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 gap-8 sm:gap-10">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 gap-6 sm:gap-8">
           {/* Logo centrado en el hero */}
           <div className="flex justify-center">
             <img src={zodiarkLogo} alt="Zodiark" className="h-24 sm:h-32 md:h-40 lg:h-48" />
           </div>
 
-          {/* Headline - estilo del repo original */}
+          {/* Headline + Subtitle + Countdown integrados */}
           <div className="text-center max-w-5xl">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-10 text-glow leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-glow leading-tight">
               {t('game.headline')}
             </h1>
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground mb-10 md:mb-14 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8">
               {t('game.sub')}
             </p>
+            
+            {/* Countdown integrado */}
+            <Countdown />
           </div>
-
-          {/* Countdown */}
-          <Countdown />
 
           {/* CTA */}
           <div className="flex flex-col items-center gap-4 w-full max-w-md px-4">

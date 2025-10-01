@@ -21,15 +21,18 @@ export const LanguageSelector = () => {
   const location = useLocation();
 
   const handleLanguageChange = (langCode: string) => {
+    // Cambiar el idioma en i18next
     i18n.changeLanguage(langCode);
     
-    // Update URL with new language
+    // Extraer la parte de la ruta sin el idioma
     const pathParts = location.pathname.split('/').filter(Boolean);
-    const isThankYouPage = pathParts.includes('thank-you');
+    const currentLang = pathParts[0];
     
-    if (isThankYouPage) {
+    // Si estamos en thank-you
+    if (pathParts.includes('thank-you')) {
       navigate(`/${langCode}/thank-you`, { replace: true });
     } else {
+      // Estamos en la página principal
       navigate(`/${langCode}`, { replace: true });
     }
   };
