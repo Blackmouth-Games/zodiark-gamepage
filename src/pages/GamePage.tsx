@@ -86,7 +86,14 @@ export const GamePage = () => {
         <header className="p-4 sm:p-6 flex justify-between items-center">
           <Button
             variant="outline"
-            onClick={() => navigate(`/${i18n.language}/thank-you`)}
+            onClick={() => {
+              // Store a demo result for testing
+              storeRedeemResult({
+                status: 'OK',
+                granted: ['Astral Egg (Rare)', '1000 Premium Currency'],
+              });
+              navigate(`/${i18n.language}/thank-you`);
+            }}
             className="border-primary/30 text-foreground hover:bg-primary/10"
           >
             View Thank You
