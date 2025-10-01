@@ -72,12 +72,16 @@ export const GamePage = () => {
       {/* Fire Particles */}
       <FireParticles />
       
-      {/* Background Hero Art */}
+      {/* Background Hero Art with vignette */}
       <div 
-        className="absolute inset-0 opacity-20 bg-cover bg-center bg-no-repeat z-0"
+        className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url(${heroArt})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-background/70 to-background z-0" />
+      {/* Vignette effect */}
+      <div className="absolute inset-0 z-0" style={{
+        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.8) 100%)'
+      }} />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
@@ -90,11 +94,11 @@ export const GamePage = () => {
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 gap-8 sm:gap-12">
           {/* Headline */}
-          <div className="text-center max-w-3xl">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 text-gradient-cosmic leading-tight">
+          <div className="text-center max-w-4xl">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 text-white uppercase leading-tight tracking-tight drop-shadow-2xl">
               {t('game.headline')}
             </h1>
-            <p className="text-base sm:text-xl text-muted-foreground">
+            <p className="text-lg sm:text-2xl md:text-3xl text-white/90 font-medium">
               {t('game.sub')}
             </p>
           </div>
@@ -108,12 +112,15 @@ export const GamePage = () => {
               size="lg"
               onClick={handleClaimReward}
               disabled={isRedeeming}
-              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-lg py-6 rounded-xl glow-effect transition-all"
+              className="w-full sm:w-auto px-12 bg-accent hover:bg-accent/90 text-accent-foreground font-black text-xl py-7 rounded-xl shadow-2xl transition-all transform hover:scale-105 uppercase tracking-wide"
+              style={{
+                boxShadow: '0 0 40px rgba(255, 163, 0, 0.6), 0 10px 30px rgba(0, 0, 0, 0.5)'
+              }}
             >
               {isRedeeming ? '...' : t('game.cta')}
             </Button>
             {error && (
-              <p className="text-destructive text-sm text-center">{error}</p>
+              <p className="text-destructive text-sm text-center font-semibold">{error}</p>
             )}
           </div>
         </main>

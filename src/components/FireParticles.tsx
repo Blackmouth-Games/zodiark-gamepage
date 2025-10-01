@@ -30,7 +30,7 @@ export const FireParticles = () => {
     window.addEventListener('resize', resize);
 
     const particles: Particle[] = [];
-    const particleCount = 50;
+    const particleCount = 80; // Más partículas
 
     // Create particles
     for (let i = 0; i < particleCount; i++) {
@@ -41,17 +41,17 @@ export const FireParticles = () => {
       return {
         x: Math.random() * canvas!.width,
         y: canvas!.height + 10,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: -Math.random() * 1.5 - 0.5,
-        size: Math.random() * 3 + 1,
+        vx: (Math.random() - 0.5) * 0.8, // Más movimiento horizontal
+        vy: -Math.random() * 2 - 0.8, // Más velocidad vertical
+        size: Math.random() * 4 + 1, // Partículas más grandes
         life: 0,
-        maxLife: Math.random() * 100 + 100,
-        hue: Math.random() * 30 + 20, // Orange-yellow hues (20-50)
+        maxLife: Math.random() * 120 + 80, // Vida más variable
+        hue: Math.random() * 40 + 15, // Rango más amplio de naranjas (15-55)
       };
     }
 
     function animate() {
-      ctx!.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx!.fillStyle = 'rgba(0, 0, 0, 0.03)'; // Fade más suave
       ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
 
       particles.forEach((particle, index) => {
@@ -100,7 +100,7 @@ export const FireParticles = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-30"
+      className="fixed inset-0 pointer-events-none z-0 opacity-40"
       style={{ mixBlendMode: 'screen' }}
     />
   );
