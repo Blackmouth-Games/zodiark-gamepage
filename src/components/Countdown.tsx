@@ -32,10 +32,6 @@ const CountdownUnit = ({ value, label }: { value: number; label: string }) => {
           {formatCountdownValue(value)}
         </div>
       </div>
-      {/* Label below */}
-      <div className="text-[10px] sm:text-xs md:text-sm text-foreground uppercase tracking-wider mt-2 font-semibold">
-        {label}
-      </div>
     </div>
   );
 };
