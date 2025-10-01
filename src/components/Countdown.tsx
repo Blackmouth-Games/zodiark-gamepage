@@ -14,16 +14,8 @@ export const Countdown = () => {
     return () => clearInterval(interval);
   }, []);
 
-  if (countdown.isExpired) {
-    return (
-      <div className="text-center">
-        <p className="text-2xl text-cosmic-glow">The journey has begun!</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex justify-center gap-4 sm:gap-8 md:gap-12 w-full max-w-4xl mx-auto px-4 mt-8">
+    <div className="flex justify-center gap-3 sm:gap-4 md:gap-6 w-full max-w-4xl mx-auto px-4 mt-8">
       <CountdownUnit value={countdown.days} label={t('game.countdown.days')} />
       <CountdownUnit value={countdown.hours} label={t('game.countdown.hours')} />
       <CountdownUnit value={countdown.minutes} label={t('game.countdown.minutes')} />
@@ -34,12 +26,14 @@ export const Countdown = () => {
 const CountdownUnit = ({ value, label }: { value: number; label: string }) => {
   return (
     <div className="flex flex-col items-center">
-      {/* Número grande con estilo del título */}
-      <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-glow mb-2">
-        {formatCountdownValue(value)}
+      {/* Box with border like reference image */}
+      <div className="border-2 border-primary/40 rounded-2xl px-6 py-4 sm:px-8 sm:py-6 md:px-10 md:py-8 bg-background/20 backdrop-blur-sm min-w-[80px] sm:min-w-[120px] md:min-w-[140px]">
+        <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-glow">
+          {formatCountdownValue(value)}
+        </div>
       </div>
-      {/* Label */}
-      <div className="text-xs sm:text-sm md:text-base text-muted-foreground uppercase tracking-wider">
+      {/* Label below */}
+      <div className="text-xs sm:text-sm md:text-base text-foreground uppercase tracking-wider mt-3 font-semibold">
         {label}
       </div>
     </div>

@@ -14,40 +14,22 @@ export interface CountdownTime {
 }
 
 /**
- * Get target launch date (next 17th at 00:00 Madrid time)
- * If override is set in env, use that instead
+ * Get target launch date: October 17, 2025 at 11:59 AM Madrid time
  */
 export const getTargetDate = (): DateTime => {
-  const override = import.meta.env.VITE_LAUNCH_OVERRIDE_ISO;
-  
-  if (override) {
-    // Parse override ISO string as Madrid time
-    return DateTime.fromISO(override, { zone: 'Europe/Madrid' });
-  }
-
-  // Get current time in Madrid timezone
-  const now = DateTime.now().setZone('Europe/Madrid');
-  
-  // Target: 17th at 00:00 of current month
-  let target = DateTime.fromObject(
+  // Target: October 17, 2025 at 11:59 AM Madrid time
+  return DateTime.fromObject(
     {
-      year: now.year,
-      month: now.month,
+      year: 2025,
+      month: 10,
       day: 17,
-      hour: 0,
-      minute: 0,
+      hour: 11,
+      minute: 59,
       second: 0,
       millisecond: 0,
     },
     { zone: 'Europe/Madrid' }
   );
-
-  // If we're past this month's 17th at 00:00, target next month
-  if (now >= target) {
-    target = target.plus({ months: 1 });
-  }
-
-  return target;
 };
 
 /**

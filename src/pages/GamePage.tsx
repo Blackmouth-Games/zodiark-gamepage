@@ -82,8 +82,15 @@ export const GamePage = () => {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
-        {/* Header - Solo selector en esquina */}
-        <header className="p-4 sm:p-6 flex justify-end items-center">
+        {/* Header */}
+        <header className="p-4 sm:p-6 flex justify-between items-center">
+          <Button
+            variant="outline"
+            onClick={() => navigate(`/${i18n.language}/thank-you`)}
+            className="border-primary/30 text-foreground hover:bg-primary/10"
+          >
+            View Thank You
+          </Button>
           <LanguageSelector />
         </header>
 

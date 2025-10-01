@@ -130,6 +130,31 @@ export const ThankPage = () => {
                 <RewardStrip rewards={result.granted} />
               )}
 
+              {/* Detailed explanation of rewards */}
+              <div className="w-full max-w-2xl mx-auto space-y-6 text-left">
+                <div className="card-cosmic rounded-lg p-6">
+                  <h2 className="text-2xl font-bold mb-4 text-cosmic-glow">What You've Received</h2>
+                  
+                  <div className="space-y-4 text-muted-foreground">
+                    <p>
+                      As an <strong className="text-foreground">Early Seeker</strong>, you have been granted exclusive rewards that will give you a significant advantage when Zodiark: Astral Awakening launches on October 17, 2025.
+                    </p>
+                    
+                    <p>
+                      Your <strong className="text-foreground">Astral Egg</strong> is a unique NFT that contains a mysterious Guardian waiting to hatch. This is not just any egg - it's your personal companion that will grow and evolve with you throughout your cosmic journey.
+                    </p>
+                    
+                    <p>
+                      The <strong className="text-foreground">Premium Currency</strong> you've received can be used to accelerate your progress, unlock special items, and customize your Guardian. This currency will be waiting for you in your account when the game launches.
+                    </p>
+                    
+                    <p>
+                      All your rewards will be automatically available in your Telegram account when you access the Zodiark bot on launch day. Simply open the bot and start playing - everything will be ready for you!
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* Timeline */}
               <Timeline />
 
