@@ -82,16 +82,18 @@ export const GamePage = () => {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
-        {/* Header - Logo centrado, selector en esquina */}
-        <header className="p-4 sm:p-6 flex justify-center items-center relative">
-          <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
-          <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
-            <LanguageSelector />
-          </div>
+        {/* Header - Solo selector en esquina */}
+        <header className="p-4 sm:p-6 flex justify-end items-center">
+          <LanguageSelector />
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 gap-8 sm:gap-12">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 gap-8 sm:gap-10">
+          {/* Logo centrado en el hero */}
+          <div className="flex justify-center">
+            <img src={zodiarkLogo} alt="Zodiark" className="h-24 sm:h-32 md:h-40 lg:h-48" />
+          </div>
+
           {/* Headline */}
           <div className="text-center max-w-4xl">
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 text-white uppercase leading-tight tracking-tight drop-shadow-2xl">

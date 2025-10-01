@@ -82,12 +82,9 @@ export const ThankPage = () => {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
-        {/* Header - Logo centrado, selector en esquina */}
-        <header className="p-4 sm:p-6 flex justify-center items-center relative">
-          <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
-          <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
-            <LanguageSelector />
-          </div>
+        {/* Header - Solo selector en esquina */}
+        <header className="p-4 sm:p-6 flex justify-end items-center">
+          <LanguageSelector />
         </header>
 
         {/* Main Content */}
