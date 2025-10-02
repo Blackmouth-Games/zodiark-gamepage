@@ -22,6 +22,32 @@ export const ThankPage = () => {
   const [result, setResult] = useState<RedeemResult | null>(null);
   const [debugOpen, setDebugOpen] = useState(false);
 
+  // Test functions for debug
+  const testNotOK = () => {
+    const testResult: RedeemResult = {
+      status: 'NOT_OK',
+      reason: 'ALREADY_OWN_77',
+      granted: []
+    };
+    setResult(testResult);
+  };
+
+  const testOnly77 = () => {
+    const testResult: RedeemResult = {
+      status: 'OK',
+      granted: ['77']
+    };
+    setResult(testResult);
+  };
+
+  const test77And73 = () => {
+    const testResult: RedeemResult = {
+      status: 'OK',
+      granted: ['77', '73']
+    };
+    setResult(testResult);
+  };
+
   useEffect(() => {
     // Get and clear result from sessionStorage
     const storedResult = getAndClearRedeemResult();
@@ -115,8 +141,61 @@ export const ThankPage = () => {
           <LanguageSelector />
         </header>
         
-        {/* Debug Panel */}
-        <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
+        {/* Debug Panel with Test Buttons */}
+        {debugOpen && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+            <div className="bg-card border border-primary/20 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b border-primary/20 flex justify-between items-center sticky top-0 bg-card z-10">
+                <h2 className="text-xl font-bold text-foreground">Debug Panel - Test API Responses</h2>
+                <Button variant="ghost" size="icon" onClick={() => setDebugOpen(false)}>
+                  <Bug className="w-4 h-4" />
+                </Button>
+              </div>
+
+              <div className="p-6 space-y-4">
+                <div className="space-y-3">
+                  <h3 className="text-lg font-semibold text-primary">Test API Responses</h3>
+                  <p className="text-sm text-muted-foreground">Click on any button to test different API response scenarios</p>
+                  
+                  <div className="grid grid-cols-1 gap-3">
+                    <Button
+                      onClick={testNotOK}
+                      variant="outline"
+                      className="w-full justify-start border-destructive/30 hover:bg-destructive/10"
+                    >
+                      <XCircle className="w-4 h-4 mr-2" />
+                      Test NOT_OK (Already claimed)
+                    </Button>
+                    
+                    <Button
+                      onClick={testOnly77}
+                      variant="outline"
+                      className="w-full justify-start border-primary/30 hover:bg-primary/10"
+                    >
+                      <CheckCircle2 className="w-4 h-4 mr-2" />
+                      Test OK - Only Starter Pack (77)
+                    </Button>
+                    
+                    <Button
+                      onClick={test77And73}
+                      variant="outline"
+                      className="w-full justify-start border-accent/30 hover:bg-accent/10"
+                    >
+                      <CheckCircle2 className="w-4 h-4 mr-2" />
+                      Test OK - Starter Pack (77) + Special Egg (73)
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-border">
+                  <p className="text-xs text-muted-foreground">
+                    Current result: {result ? JSON.stringify(result, null, 2) : 'None'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 gap-8 overflow-y-auto">
