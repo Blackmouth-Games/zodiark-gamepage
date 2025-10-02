@@ -39,9 +39,10 @@ export const calculateCountdown = (): CountdownTime => {
   const now = DateTime.now().setZone('Europe/Madrid');
   const target = getTargetDate();
 
-  const diff = target.diff(now, ['days', 'hours', 'minutes', 'seconds']);
+  const diff = target.diff(now, ['days', 'hours', 'minutes', 'seconds']).toObject();
 
-  if (diff.milliseconds <= 0) {
+  // Check if target is in the past
+  if (target < now) {
     return {
       days: 0,
       hours: 0,
@@ -52,10 +53,10 @@ export const calculateCountdown = (): CountdownTime => {
   }
 
   return {
-    days: Math.floor(diff.days),
-    hours: Math.floor(diff.hours),
-    minutes: Math.floor(diff.minutes),
-    seconds: Math.floor(diff.seconds),
+    days: Math.floor(diff.days || 0),
+    hours: Math.floor(diff.hours || 0),
+    minutes: Math.floor(diff.minutes || 0),
+    seconds: Math.floor(diff.seconds || 0),
     isExpired: false,
   };
 };
