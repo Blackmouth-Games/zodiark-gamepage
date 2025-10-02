@@ -3,6 +3,7 @@ import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { getTelegramUser } from '@/telegram/telegram';
+import { calculateCountdown, getTargetDate } from '@/utils/countdown';
 
 interface APICall {
   timestamp: string;
@@ -10,6 +11,7 @@ interface APICall {
   request: any;
   response: any;
   status: number;
+  apiUrl?: string;
 }
 
 interface DebugPanelProps {
@@ -20,6 +22,7 @@ interface DebugPanelProps {
 export const DebugPanel = ({ isOpen, onClose }: DebugPanelProps) => {
   const [apiCalls, setApiCalls] = useState<APICall[]>([]);
   const [expandedCall, setExpandedCall] = useState<number | null>(null);
+  const [countdown, setCountdown] = useState(calculateCountdown());
   const telegramUser = getTelegramUser();
 
   useEffect(() => {
@@ -28,6 +31,13 @@ export const DebugPanel = ({ isOpen, onClose }: DebugPanelProps) => {
     if (stored) {
       setApiCalls(JSON.parse(stored));
     }
+    
+    // Update countdown every second when panel is open
+    const interval = setInterval(() => {
+      setCountdown(calculateCountdown());
+    }, 1000);
+    
+    return () => clearInterval(interval);
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -45,6 +55,37 @@ export const DebugPanel = ({ isOpen, onClose }: DebugPanelProps) => {
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
+          {/* Countdown Debug Info */}
+          <div>
+            <h3 className="text-lg font-semibold mb-3">Countdown Information</h3>
+            <div className="bg-muted/30 rounded-lg p-4 space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Target Date:</span>
+                <span className="font-mono">{getTargetDate().toFormat('yyyy-MM-dd HH:mm:ss ZZZZ')}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Current Time:</span>
+                <span className="font-mono">{new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Days:</span>
+                <span className="font-mono font-bold text-accent">{countdown.days}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Hours:</span>
+                <span className="font-mono font-bold text-accent">{countdown.hours}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Minutes:</span>
+                <span className="font-mono font-bold text-accent">{countdown.minutes}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Seconds:</span>
+                <span className="font-mono font-bold text-accent">{countdown.seconds}</span>
+              </div>
+            </div>
+          </div>
+
           {/* Telegram User Info */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Telegram User Info</h3>
@@ -70,9 +111,9 @@ export const DebugPanel = ({ isOpen, onClose }: DebugPanelProps) => {
                   <div key={index} className="border rounded-lg overflow-hidden">
                     <button
                       onClick={() => setExpandedCall(expandedCall === index ? null : index)}
-                      className="w-full p-3 flex items-center justify-between hover:bg-muted/30 transition-colors"
+                      className="w-full p-3 flex flex-col items-start gap-2 hover:bg-muted/30 transition-colors"
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 w-full">
                         <span className={`px-2 py-1 rounded text-xs font-semibold ${
                           call.status >= 200 && call.status < 300 
                             ? 'bg-green-500/20 text-green-400' 
@@ -81,12 +122,17 @@ export const DebugPanel = ({ isOpen, onClose }: DebugPanelProps) => {
                           {call.status}
                         </span>
                         <span className="font-mono text-sm">{call.endpoint}</span>
-                        <span className="text-xs text-muted-foreground">{call.timestamp}</span>
+                        <span className="text-xs text-muted-foreground ml-auto">{call.timestamp}</span>
+                        {expandedCall === index ? (
+                          <ChevronUp className="w-4 h-4" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4" />
+                        )}
                       </div>
-                      {expandedCall === index ? (
-                        <ChevronUp className="w-4 h-4" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4" />
+                      {call.apiUrl && (
+                        <div className="text-xs text-muted-foreground font-mono w-full text-left">
+                          API: {call.apiUrl}
+                        </div>
                       )}
                     </button>
                     

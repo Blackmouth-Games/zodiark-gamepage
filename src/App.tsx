@@ -19,13 +19,16 @@ const LanguageRouter = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const validLanguages = ['en', 'es', 'pt', 'fr', 'zh', 'hi'];
+    
     // Check for ?lang= override
     const params = new URLSearchParams(location.search);
     const langOverride = params.get('lang');
 
-    if (langOverride && ['en', 'es', 'pt', 'fr'].includes(langOverride)) {
+    if (langOverride && validLanguages.includes(langOverride)) {
       // Use override
       i18n.changeLanguage(langOverride);
+      localStorage.setItem('preferred_language', langOverride);
       
       // If not on a lang-prefixed route, redirect
       if (!location.pathname.startsWith(`/${langOverride}`)) {
@@ -34,13 +37,34 @@ const LanguageRouter = () => {
       return;
     }
 
-    // Auto-detect from Telegram
-    const detectedLang = detectLanguage();
-    i18n.changeLanguage(detectedLang);
+    // Check localStorage for preferred language
+    const storedLang = localStorage.getItem('preferred_language');
+    
+    // Extract language from current path
+    const pathLangMatch = location.pathname.match(/^\/(en|es|pt|fr|zh|hi)/);
+    const pathLang = pathLangMatch ? pathLangMatch[1] : null;
 
-    // If on root or non-lang route, redirect to detected lang
-    if (location.pathname === '/' || !location.pathname.match(/^\/(en|es|pt|fr)/)) {
-      navigate(`/${detectedLang}`, { replace: true });
+    // Determine which language to use
+    let targetLang: string;
+    if (pathLang && validLanguages.includes(pathLang)) {
+      targetLang = pathLang;
+      localStorage.setItem('preferred_language', pathLang);
+    } else if (storedLang && validLanguages.includes(storedLang)) {
+      targetLang = storedLang;
+    } else {
+      // Auto-detect from Telegram
+      targetLang = detectLanguage();
+      localStorage.setItem('preferred_language', targetLang);
+    }
+
+    // Update i18n if needed
+    if (i18n.language !== targetLang) {
+      i18n.changeLanguage(targetLang);
+    }
+
+    // If on root or non-lang route, redirect to target lang
+    if (location.pathname === '/' || !pathLang) {
+      navigate(`/${targetLang}`, { replace: true });
     }
   }, [location, navigate]);
 

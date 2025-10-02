@@ -70,14 +70,9 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground overflow-hidden;
+    @apply bg-background text-foreground;
     background: linear-gradient(135deg, hsl(265 70% 8%), hsl(265 50% 10%), hsl(0 0% 8%));
     min-height: 100vh;
-  }
-
-  html {
-    overflow: hidden;
-    height: 100%;
   }
 }
 

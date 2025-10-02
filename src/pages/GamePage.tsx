@@ -156,8 +156,10 @@ export const GamePage = () => {
         </main>
 
         {/* Footer */}
-        <footer className="p-4 text-center text-xs text-muted-foreground">
-          © 2025 Zodiark: Astral Awakening
+        <footer className="p-6 border-t border-primary/20 bg-card/30 backdrop-blur-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
+            <p>© 2025 Zodiark. All rights reserved.</p>
+          </div>
         </footer>
       </div>
     </div>

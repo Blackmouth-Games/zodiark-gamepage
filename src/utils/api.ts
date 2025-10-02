@@ -48,11 +48,12 @@ export const callRedeemAPI = async (
 
     // Store API call for debug panel
     const debugCall = {
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toLocaleString(),
       endpoint: '/redeem',
       request: requestBody,
       response: data,
       status: response.status,
+      apiUrl: window.location.origin + '/redeem',
     };
     
     const existingCalls = JSON.parse(sessionStorage.getItem('debug_api_calls') || '[]');

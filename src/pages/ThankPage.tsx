@@ -6,17 +6,21 @@ import { SocialLinks } from '@/components/SocialLinks';
 import { FireParticles } from '@/components/FireParticles';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { TestModeBanner } from '@/components/TestModeBanner';
+import { DebugPanel } from '@/components/DebugPanel';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { getAndClearRedeemResult, type RedeemResult } from '@/utils/api';
 import { trackEvent } from '@/utils/tracker';
 import thankYouBg from '@/assets/thank-you-bg.png';
-import { CheckCircle2, XCircle } from 'lucide-react';
+import specialEgg from '@/assets/special-egg.png';
+import starterPack from '@/assets/starter-pack.png';
+import { CheckCircle2, XCircle, Bug, Home } from 'lucide-react';
 
 export const ThankPage = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [result, setResult] = useState<RedeemResult | null>(null);
+  const [debugOpen, setDebugOpen] = useState(false);
 
   useEffect(() => {
     // Get and clear result from sessionStorage
@@ -77,19 +81,42 @@ export const ThankPage = () => {
       {/* Fire Particles */}
       <FireParticles />
       
-      {/* Background Image */}
+      {/* Background Image - Fixed */}
       <div 
-        className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat z-0"
+        className="fixed inset-0 opacity-30 bg-cover bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url(${thankYouBg})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-background/80 z-0" />
+      <div className="fixed inset-0 bg-gradient-to-b from-transparent via-black/30 to-background/80 z-0" />
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col">
-        {/* Header - Solo selector en esquina */}
-        <header className="p-4 sm:p-6 flex justify-end items-center">
+      <div className="relative z-10 flex-1 flex flex-col overflow-y-auto">
+        {/* Header */}
+        <header className="p-4 sm:p-6 flex justify-between items-center">
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setDebugOpen(true)}
+              className="border-primary/30 text-foreground hover:bg-primary/10"
+              title="Debug Panel"
+            >
+              <Bug className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => navigate(`/${i18n.language}`)}
+              className="border-primary/30 text-foreground hover:bg-primary/10"
+              title="Go to Game Page"
+            >
+              <Home className="w-4 h-4" />
+            </Button>
+          </div>
           <LanguageSelector />
         </header>
+        
+        {/* Debug Panel */}
+        <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 gap-8 overflow-y-auto">
@@ -141,19 +168,29 @@ export const ThankPage = () => {
                 </h2>
                 
                 <Accordion type="single" collapsible className="space-y-4">
-                  <AccordionItem value="item-1" className="card-cosmic rounded-lg border-border/50">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <AccordionItem value="item-1" className="card-cosmic rounded-xl border border-primary/20 overflow-hidden backdrop-blur-sm">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q1.question')}
                       </span>
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
-                      {t('thank.faq.q1.answer')}
+                    <AccordionContent className="px-6 pb-4 space-y-4">
+                      <p className="text-muted-foreground">{t('thank.faq.q1.answer')}</p>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-card/50 border border-accent/20">
+                          <img src={starterPack} alt="Starter Pack" className="w-24 h-24 object-contain" />
+                          <p className="text-sm font-semibold text-accent">Starter Pack</p>
+                        </div>
+                        <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-card/50 border border-accent/20">
+                          <img src={specialEgg} alt="Special Egg" className="w-24 h-24 object-contain" />
+                          <p className="text-sm font-semibold text-accent">Special Egg</p>
+                        </div>
+                      </div>
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="card-cosmic rounded-lg border-border/50">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <AccordionItem value="item-2" className="card-cosmic rounded-xl border border-primary/20 overflow-hidden backdrop-blur-sm">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q2.question')}
                       </span>
@@ -163,8 +200,8 @@ export const ThankPage = () => {
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="card-cosmic rounded-lg border-border/50">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <AccordionItem value="item-3" className="card-cosmic rounded-xl border border-primary/20 overflow-hidden backdrop-blur-sm">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q3.question')}
                       </span>
@@ -174,8 +211,8 @@ export const ThankPage = () => {
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-4" className="card-cosmic rounded-lg border-border/50">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <AccordionItem value="item-4" className="card-cosmic rounded-xl border border-primary/20 overflow-hidden backdrop-blur-sm">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q4.question')}
                       </span>
@@ -204,8 +241,10 @@ export const ThankPage = () => {
         </main>
 
         {/* Footer */}
-        <footer className="p-4 text-center text-xs text-muted-foreground">
-          © 2025 Zodiark: Astral Awakening
+        <footer className="p-6 border-t border-primary/20 bg-card/30 backdrop-blur-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
+            <p>© 2025 Zodiark. All rights reserved.</p>
+          </div>
         </footer>
       </div>
     </div>
