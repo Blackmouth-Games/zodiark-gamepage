@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { RewardStrip } from '@/components/RewardStrip';
-import { Timeline } from '@/components/Timeline';
 import { SocialLinks } from '@/components/SocialLinks';
 import { FireParticles } from '@/components/FireParticles';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { TestModeBanner } from '@/components/TestModeBanner';
 import { Button } from '@/components/ui/button';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { getAndClearRedeemResult, type RedeemResult } from '@/utils/api';
 import { trackEvent } from '@/utils/tracker';
-import zodiarkLogo from '@/assets/zodiark-logo.svg';
+import thankYouBg from '@/assets/thank-you-bg.png';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
 export const ThankPage = () => {
@@ -77,8 +77,12 @@ export const ThankPage = () => {
       {/* Fire Particles */}
       <FireParticles />
       
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-background/60 z-0" />
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat z-0"
+        style={{ backgroundImage: `url(${thankYouBg})` }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-background/80 z-0" />
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col">
@@ -130,33 +134,58 @@ export const ThankPage = () => {
                 <RewardStrip rewards={result.granted} />
               )}
 
-              {/* Detailed explanation of rewards */}
-              <div className="w-full max-w-2xl mx-auto space-y-6 text-left">
-                <div className="card-cosmic rounded-lg p-6">
-                  <h2 className="text-2xl font-bold mb-4 text-cosmic-glow">What You've Received</h2>
-                  
-                  <div className="space-y-4 text-muted-foreground">
-                    <p>
-                      As an <strong className="text-foreground">Early Seeker</strong>, you have been granted exclusive rewards that will give you a significant advantage when Zodiark: Astral Awakening launches on October 17, 2025.
-                    </p>
-                    
-                    <p>
-                      Your <strong className="text-foreground">Astral Egg</strong> is a unique NFT that contains a mysterious Guardian waiting to hatch. This is not just any egg - it's your personal companion that will grow and evolve with you throughout your cosmic journey.
-                    </p>
-                    
-                    <p>
-                      The <strong className="text-foreground">Premium Currency</strong> you've received can be used to accelerate your progress, unlock special items, and customize your Guardian. This currency will be waiting for you in your account when the game launches.
-                    </p>
-                    
-                    <p>
-                      All your rewards will be automatically available in your Telegram account when you access the Zodiark bot on launch day. Simply open the bot and start playing - everything will be ready for you!
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {/* FAQ Section */}
+              <div className="w-full max-w-3xl mx-auto">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-cosmic-glow text-center">
+                  {t('thank.faq.title')}
+                </h2>
+                
+                <Accordion type="single" collapsible className="space-y-4">
+                  <AccordionItem value="item-1" className="card-cosmic rounded-lg border-border/50">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                      <span className="text-left font-semibold text-foreground">
+                        {t('thank.faq.q1.question')}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                      {t('thank.faq.q1.answer')}
+                    </AccordionContent>
+                  </AccordionItem>
 
-              {/* Timeline */}
-              <Timeline />
+                  <AccordionItem value="item-2" className="card-cosmic rounded-lg border-border/50">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                      <span className="text-left font-semibold text-foreground">
+                        {t('thank.faq.q2.question')}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                      {t('thank.faq.q2.answer')}
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-3" className="card-cosmic rounded-lg border-border/50">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                      <span className="text-left font-semibold text-foreground">
+                        {t('thank.faq.q3.question')}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                      {t('thank.faq.q3.answer')}
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-4" className="card-cosmic rounded-lg border-border/50">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                      <span className="text-left font-semibold text-foreground">
+                        {t('thank.faq.q4.question')}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                      {t('thank.faq.q4.answer')}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
 
               {/* Community Links */}
               <SocialLinks />

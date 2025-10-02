@@ -30,6 +30,25 @@
         "title": "Fase de Despertar",
         "desc": "Torne-se um Guardião"
       }
+    },
+    "faq": {
+      "title": "Perguntas Frequentes",
+      "q1": {
+        "question": "Quais recompensas eu poderia receber?",
+        "answer": "Os Buscadores Precoces podem receber dois tipos de recompensas: um Pacote Inicial (contém moeda premium e recursos) e um Ovo Especial (um NFT único com um Guardião misterioso dentro)."
+      },
+      "q2": {
+        "question": "Onde posso encontrá-las?",
+        "answer": "Suas recompensas estarão disponíveis automaticamente em sua conta do Telegram quando o jogo for lançado. Basta abrir o bot e você terá acesso a elas."
+      },
+      "q3": {
+        "question": "Quando estarão disponíveis?",
+        "answer": "Suas recompensas estarão disponíveis após o lançamento do jogo em 17 de outubro de 2025. Você receberá uma notificação via Telegram quando puder usá-las."
+      },
+      "q4": {
+        "question": "O que preciso fazer para usá-las?",
+        "answer": "Após o lançamento, abra seu inventário no jogo dentro do bot Zodiark e você encontrará suas recompensas prontas para usar imediatamente."
+      }
     }
   },
   "errors": {

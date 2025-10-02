@@ -30,6 +30,25 @@
         "title": "Phase d'Éveil",
         "desc": "Devenez un Gardien"
       }
+    },
+    "faq": {
+      "title": "Questions Fréquemment Posées",
+      "q1": {
+        "question": "Quelles récompenses pourrais-je recevoir?",
+        "answer": "Les Chercheurs Précoces peuvent recevoir deux types de récompenses: un Pack de Démarrage (contient de la monnaie premium et des ressources) et un Œuf Spécial (un NFT unique avec un Gardien mystérieux à l'intérieur)."
+      },
+      "q2": {
+        "question": "Où puis-je les trouver?",
+        "answer": "Vos récompenses seront automatiquement disponibles dans votre compte Telegram lors du lancement du jeu. Ouvrez simplement le bot et vous y aurez accès."
+      },
+      "q3": {
+        "question": "Quand seront-elles disponibles?",
+        "answer": "Vos récompenses seront disponibles après le lancement du jeu le 17 octobre 2025. Vous recevrez une notification via Telegram lorsque vous pourrez les utiliser."
+      },
+      "q4": {
+        "question": "Que dois-je faire pour les utiliser?",
+        "answer": "Après le lancement, ouvrez votre inventaire en jeu dans le bot Zodiark et vous trouverez vos récompenses prêtes à être utilisées immédiatement."
+      }
     }
   },
   "errors": {

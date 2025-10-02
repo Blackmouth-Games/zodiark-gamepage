@@ -30,6 +30,25 @@
         "title": "Awakening Phase",
         "desc": "Become a Guardian"
       }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "What rewards could I receive?",
+        "answer": "Early Seekers can receive two types of rewards: a Starter Pack (contains premium currency and resources) and a Special Egg (a unique NFT with a mysterious Guardian inside)."
+      },
+      "q2": {
+        "question": "Where can I find them?",
+        "answer": "Your rewards will be automatically available in your Telegram account when the game launches. Simply open the bot and you'll have access to them."
+      },
+      "q3": {
+        "question": "When will they be available?",
+        "answer": "Your rewards will be available after the game launches on October 17, 2025. You'll receive a notification via Telegram when you can use them."
+      },
+      "q4": {
+        "question": "What do I need to do to use them?",
+        "answer": "After launch, open your in-game inventory within the Zodiark bot and you'll find your rewards ready to use immediately."
+      }
     }
   },
   "errors": {

@@ -32,6 +32,7 @@ export const callRedeemAPI = async (
   lang: string
 ): Promise<RedeemResult> => {
   const clicked_at = new Date().toISOString();
+  const requestBody = { tg_id, lang, clicked_at } as RedeemRequest;
 
   try {
     const response = await fetch('/redeem', {
@@ -39,16 +40,28 @@ export const callRedeemAPI = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ tg_id, lang, clicked_at } as RedeemRequest),
+      body: JSON.stringify(requestBody),
       signal: AbortSignal.timeout(10000), // 10s timeout
     });
+
+    const data: RedeemResponse = await response.json();
+
+    // Store API call for debug panel
+    const debugCall = {
+      timestamp: new Date().toISOString(),
+      endpoint: '/redeem',
+      request: requestBody,
+      response: data,
+      status: response.status,
+    };
+    
+    const existingCalls = JSON.parse(sessionStorage.getItem('debug_api_calls') || '[]');
+    sessionStorage.setItem('debug_api_calls', JSON.stringify([...existingCalls, debugCall]));
 
     if (!response.ok) {
       console.error('Redeem API returned non-200:', response.status);
       return { status: 'ERROR' };
     }
-
-    const data: RedeemResponse = await response.json();
 
     // Check if response has 'granted' property (OK case)
     if ('granted' in data) {

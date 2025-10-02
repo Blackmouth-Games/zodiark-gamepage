@@ -30,6 +30,25 @@
         "title": "Fase de Despertar",
         "desc": "Conviértete en Guardián"
       }
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "q1": {
+        "question": "¿Qué recompensas podría recibir?",
+        "answer": "Los Buscadores Tempranos pueden recibir dos tipos de recompensas: un Paquete Inicial (contiene moneda premium y recursos) y un Huevo Especial (un NFT único con un Guardián misterioso en su interior)."
+      },
+      "q2": {
+        "question": "¿Dónde puedo encontrarlas?",
+        "answer": "Tus recompensas estarán disponibles automáticamente en tu cuenta de Telegram cuando el juego se lance. Simplemente abre el bot y tendrás acceso a ellas."
+      },
+      "q3": {
+        "question": "¿Cuándo estarán disponibles?",
+        "answer": "Tus recompensas estarán disponibles después del lanzamiento del juego el 17 de octubre de 2025. Recibirás una notificación por Telegram cuando puedas usarlas."
+      },
+      "q4": {
+        "question": "¿Qué debo hacer para usarlas?",
+        "answer": "Después del lanzamiento, abre tu inventario en el juego dentro del bot de Zodiark y encontrarás tus recompensas listas para usar inmediatamente."
+      }
     }
   },
   "errors": {

@@ -74,6 +74,8 @@ export const detectLanguage = (): string => {
   if (langCode.startsWith('es')) return 'es';
   if (langCode.startsWith('pt')) return 'pt';
   if (langCode.startsWith('fr')) return 'fr';
+  if (langCode.startsWith('zh')) return 'zh';
+  if (langCode.startsWith('hi')) return 'hi';
   return 'en'; // Default for all other languages
 };
 

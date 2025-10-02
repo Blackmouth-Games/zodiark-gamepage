@@ -5,12 +5,14 @@ import { Countdown } from '@/components/Countdown';
 import { FireParticles } from '@/components/FireParticles';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { TestModeBanner } from '@/components/TestModeBanner';
+import { DebugPanel } from '@/components/DebugPanel';
 import { Button } from '@/components/ui/button';
 import { getTelegramUser } from '@/telegram/telegram';
 import { callRedeemAPI, storeRedeemResult } from '@/utils/api';
 import { trackEvent } from '@/utils/tracker';
 import zodiarkLogo from '@/assets/zodiark-logo.svg';
 import heroArt from '@/assets/hero-art.png';
+import { Bug } from 'lucide-react';
 
 export const GamePage = () => {
   const { t, i18n } = useTranslation();
@@ -18,6 +20,7 @@ export const GamePage = () => {
   const [isReady, setIsReady] = useState(false);
   const [isRedeeming, setIsRedeeming] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [debugOpen, setDebugOpen] = useState(false);
 
   useEffect(() => {
     // Track page view when component is ready and i18n is initialized
@@ -84,22 +87,36 @@ export const GamePage = () => {
       <div className="relative z-10 flex-1 flex flex-col">
         {/* Header */}
         <header className="p-4 sm:p-6 flex justify-between items-center">
-          <Button
-            variant="outline"
-            onClick={() => {
-              // Store a demo result for testing
-              storeRedeemResult({
-                status: 'OK',
-                granted: ['Astral Egg (Rare)', '1000 Premium Currency'],
-              });
-              navigate(`/${i18n.language}/thank-you`);
-            }}
-            className="border-primary/30 text-foreground hover:bg-primary/10"
-          >
-            View Thank You
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setDebugOpen(true)}
+              className="border-primary/30 text-foreground hover:bg-primary/10"
+              title="Debug Panel"
+            >
+              <Bug className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                // Store a demo result for testing
+                storeRedeemResult({
+                  status: 'OK',
+                  granted: ['Astral Egg (Rare)', '1000 Premium Currency'],
+                });
+                navigate(`/${i18n.language}/thank-you`);
+              }}
+              className="border-primary/30 text-foreground hover:bg-primary/10"
+            >
+              View Thank You
+            </Button>
+          </div>
           <LanguageSelector />
         </header>
+        
+        {/* Debug Panel */}
+        <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 gap-6 sm:gap-8">

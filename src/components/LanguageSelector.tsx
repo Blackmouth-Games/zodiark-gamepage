@@ -13,6 +13,8 @@ const languages = [
   { code: 'es', name: 'Español', short: 'ES' },
   { code: 'pt', name: 'Português', short: 'PT' },
   { code: 'fr', name: 'Français', short: 'FR' },
+  { code: 'zh', name: '中文', short: 'ZH' },
+  { code: 'hi', name: 'हिन्दी', short: 'HI' },
 ];
 
 export const LanguageSelector = () => {

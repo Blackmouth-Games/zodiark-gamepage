@@ -1,0 +1,67 @@
+{
+  "game": {
+    "headline": "欢迎，早期探索者",
+    "sub": "你的宇宙之旅即将开始于…",
+    "cta": "领取奖励",
+    "loading": "初始化中...",
+    "countdown": {
+      "days": "天",
+      "hours": "小时",
+      "minutes": "分钟"
+    }
+  },
+  "thank": {
+    "title_ok": "恭喜你，早期探索者！",
+    "sub_ok": "你已成功领取奖励。",
+    "title_error": "出现问题",
+    "retry": "重试",
+    "granted": "你的奖励",
+    "timeline_title": "接下来",
+    "timeline": {
+      "launch": {
+        "title": "发布日期",
+        "desc": "宇宙之门开启"
+      },
+      "hatching": {
+        "title": "孵化活动",
+        "desc": "你的星蛋苏醒"
+      },
+      "awakening": {
+        "title": "觉醒阶段",
+        "desc": "成为守护者"
+      }
+    },
+    "faq": {
+      "title": "常见问题",
+      "q1": {
+        "question": "我可能获得哪些奖励？",
+        "answer": "早期探索者可以获得两种奖励：新手礼包（包含高级货币和资源）和特殊蛋（独特的NFT，内含神秘守护者）。"
+      },
+      "q2": {
+        "question": "在哪里可以找到它们？",
+        "answer": "你的奖励将在游戏发布时自动添加到你的Telegram账户中。只需打开机器人即可访问它们。"
+      },
+      "q3": {
+        "question": "何时可用？",
+        "answer": "你的奖励将在游戏于2025年10月17日发布后可用。当你可以使用它们时，你将通过Telegram收到通知。"
+      },
+      "q4": {
+        "question": "如何使用它们？",
+        "answer": "发布后，在Zodiark机器人中打开你的游戏库存，你会在那里找到你的奖励，可以立即使用。"
+      }
+    }
+  },
+  "errors": {
+    "missing_tg": "Telegram数据不可用。请在Telegram机器人中打开。",
+    "missing_params": "缺少必需数据。请重新打开机器人。",
+    "already_own_77": "你已经领取过此奖励。",
+    "generic": "我们无法完成你的请求。请重试。",
+    "network": "网络错误。请检查你的连接并重试。"
+  },
+  "community": {
+    "join": "加入社区",
+    "telegram": "Telegram群组",
+    "discord": "Discord服务器",
+    "x": "在X上关注"
+  }
+}
