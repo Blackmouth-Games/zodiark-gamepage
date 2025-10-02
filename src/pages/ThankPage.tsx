@@ -85,7 +85,7 @@ export const ThankPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-y-auto">
+    <div className="h-screen flex flex-col relative overflow-y-auto">
       {/* Test Mode Banner */}
       <TestModeBanner />
       
