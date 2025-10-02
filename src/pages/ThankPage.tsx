@@ -173,6 +173,12 @@ export const ThankPage = () => {
                       const image = REWARD_IMAGES[id];
                       const name = REWARD_NAMES[id] || reward;
                       
+                      // Si no hay imagen, no mostrar nada
+                      if (!image) {
+                        console.warn('No image found for reward:', reward, 'ID:', id);
+                        return null;
+                      }
+                      
                       return (
                         <div key={index} className="flex flex-col items-center gap-4 animate-float" style={{ animationDelay: `${index * 0.2}s` }}>
                           <div className="relative">
@@ -180,6 +186,9 @@ export const ThankPage = () => {
                               src={image} 
                               alt={name} 
                               className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 object-contain drop-shadow-2xl"
+                              onError={(e) => {
+                                console.error('Image failed to load:', image, 'for reward:', reward);
+                              }}
                             />
                           </div>
                           <span className="font-bold text-xl text-foreground">{name}</span>
