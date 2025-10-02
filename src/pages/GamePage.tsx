@@ -162,7 +162,7 @@ export const GamePage = () => {
         </main>
 
         {/* Footer */}
-        <footer className="p-6 border-t border-primary/20 bg-card/30 backdrop-blur-sm">
+        <footer className="p-6 border-t-2 border-accent/40 bg-gradient-to-b from-background/80 to-background backdrop-blur-md shadow-glow">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
             <p>© 2025 Zodiark. All rights reserved.</p>
           </div>
