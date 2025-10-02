@@ -1,13 +1,16 @@
 {
   "game": {
     "headline": "Bienvenue, Chercheur Précoce",
+    "journey_starting": "Votre voyage cosmique commence",
+    "early_access_reward": "Rejoignez avant le lancement pour réclamer des récompenses exclusives et limitées et avoir une chance de gagner un œuf spécial !",
     "sub": "Votre Voyage Cosmique commence dans…",
     "cta": "Réclamer Récompense",
     "loading": "Initialisation...",
     "countdown": {
       "days": "Jours",
       "hours": "Heures",
-      "minutes": "Minutes"
+      "minutes": "Minutes",
+      "seconds": "Secondes"
     }
   },
   "thank": {

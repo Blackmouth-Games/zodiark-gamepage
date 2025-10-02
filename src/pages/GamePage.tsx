@@ -131,11 +131,17 @@ export const GamePage = () => {
               {t('game.headline')}
             </h1>
             
+            {/* Journey Starting Text */}
+            <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-gradient-cosmic mb-4">
+              {t('game.journey_starting')}
+            </p>
+            
             {/* Countdown */}
             <Countdown />
             
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mt-8">
-              {t('game.sub')}
+            {/* Early Access Reward Text */}
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground mt-6 max-w-3xl mx-auto">
+              {t('game.early_access_reward')}
             </p>
           </div>
 

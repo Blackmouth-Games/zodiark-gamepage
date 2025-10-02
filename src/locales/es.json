@@ -1,13 +1,16 @@
 {
   "game": {
     "headline": "Bienvenido, Buscador Temprano",
+    "journey_starting": "Tu viaje cósmico está comenzando",
+    "early_access_reward": "¡Únete antes del lanzamiento para reclamar recompensas exclusivas y limitadas y tener la oportunidad de ganar un huevo especial!",
     "sub": "Tu Viaje Cósmico está comenzando en…",
     "cta": "Reclamar Recompensa",
     "loading": "Inicializando...",
     "countdown": {
       "days": "Días",
       "hours": "Horas",
-      "minutes": "Minutos"
+      "minutes": "Minutos",
+      "seconds": "Segundos"
     }
   },
   "thank": {

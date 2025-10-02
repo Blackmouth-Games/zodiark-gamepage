@@ -1,13 +1,16 @@
 {
   "game": {
     "headline": "Bem-vindo, Buscador Precoce",
+    "journey_starting": "Sua jornada cósmica está começando",
+    "early_access_reward": "Junte-se antes do lançamento para reivindicar recompensas exclusivas e limitadas e ter a chance de ganhar um ovo especial!",
     "sub": "Sua Jornada Cósmica está começando em…",
     "cta": "Reivindicar Recompensa",
     "loading": "Inicializando...",
     "countdown": {
       "days": "Dias",
       "hours": "Horas",
-      "minutes": "Minutos"
+      "minutes": "Minutos",
+      "seconds": "Segundos"
     }
   },
   "thank": {

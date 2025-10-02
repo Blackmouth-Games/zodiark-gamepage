@@ -1,13 +1,16 @@
 {
   "game": {
     "headline": "欢迎，早期探索者",
+    "journey_starting": "你的宇宙之旅即将开始",
+    "early_access_reward": "在发布前加入，获取独家限量奖励，并有机会赢得特殊蛋！",
     "sub": "你的宇宙之旅即将开始于…",
     "cta": "领取奖励",
     "loading": "初始化中...",
     "countdown": {
       "days": "天",
       "hours": "小时",
-      "minutes": "分钟"
+      "minutes": "分钟",
+      "seconds": "秒"
     }
   },
   "thank": {

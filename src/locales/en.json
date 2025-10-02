@@ -1,13 +1,16 @@
 {
   "game": {
     "headline": "Welcome, Early Seeker",
+    "journey_starting": "Your cosmic journey is starting",
+    "early_access_reward": "Join before launch to claim exclusive limited rewards and have a chance to win a special egg!",
     "sub": "Your Cosmic Journey is starting in…",
     "cta": "Claim Reward",
     "loading": "Initializing...",
     "countdown": {
       "days": "Days",
       "hours": "Hours",
-      "minutes": "Minutes"
+      "minutes": "Minutes",
+      "seconds": "Seconds"
     }
   },
   "thank": {
