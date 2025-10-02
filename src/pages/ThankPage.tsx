@@ -155,7 +155,7 @@ export const ThankPage = () => {
         {/* Debug Panel - Keep Real Debug Info */}
         <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
         
-        {/* Test Panel Overlay */}
+        {/* Test Panel Overlay - Only when debug is open */}
         {debugOpen && (
           <div className="fixed top-20 right-4 bg-card border-2 border-primary/40 rounded-lg p-4 z-[60] max-w-sm shadow-2xl">
             <h3 className="text-sm font-bold text-primary mb-3">🧪 Quick Test</h3>
@@ -262,9 +262,6 @@ export const ThankPage = () => {
                 </h1>
                 <p className="text-base sm:text-xl text-muted-foreground mb-6">
                   {getErrorMessage()}
-                </p>
-                <p className="text-sm text-muted-foreground mb-6">
-                  {t('thank.sub_ok')} {/* You've already participated - check FAQs below */}
                 </p>
               </div>
             </>
