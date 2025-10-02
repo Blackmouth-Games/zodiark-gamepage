@@ -168,13 +168,14 @@ export const ThankPage = () => {
                 </h2>
                 
                 <Accordion type="single" collapsible className="space-y-4">
-                  <AccordionItem value="item-1" className="rounded-xl border-2 border-blue-500/30 overflow-hidden backdrop-blur-md bg-gradient-to-r from-slate-950/80 via-neutral-900/60 to-orange-950/60">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
+                  <AccordionItem value="item-1" className="relative rounded-xl border-2 border-primary/30 overflow-hidden backdrop-blur-md">
+                    <div className="absolute inset-0 bg-gradient-to-r from-background via-secondary/15 to-primary/20 pointer-events-none" />
+                    <AccordionTrigger className="relative px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q1.question')}
                       </span>
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-4 space-y-4">
+                    <AccordionContent className="relative px-6 pb-4 space-y-4">
                       <p className="text-muted-foreground">{t('thank.faq.q1.answer')}</p>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-card/50 border border-accent/20">
@@ -189,35 +190,38 @@ export const ThankPage = () => {
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="rounded-xl border-2 border-blue-500/30 overflow-hidden backdrop-blur-md bg-gradient-to-r from-slate-950/80 via-neutral-900/60 to-orange-950/60">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
+                  <AccordionItem value="item-2" className="relative rounded-xl border-2 border-primary/30 overflow-hidden backdrop-blur-md">
+                    <div className="absolute inset-0 bg-gradient-to-r from-background via-secondary/15 to-primary/20 pointer-events-none" />
+                    <AccordionTrigger className="relative px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q2.question')}
                       </span>
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                    <AccordionContent className="relative px-6 pb-4 text-muted-foreground">
                       {t('thank.faq.q2.answer')}
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="rounded-xl border-2 border-blue-500/30 overflow-hidden backdrop-blur-md bg-gradient-to-r from-slate-950/80 via-neutral-900/60 to-orange-950/60">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
+                  <AccordionItem value="item-3" className="relative rounded-xl border-2 border-primary/30 overflow-hidden backdrop-blur-md">
+                    <div className="absolute inset-0 bg-gradient-to-r from-background via-secondary/15 to-primary/20 pointer-events-none" />
+                    <AccordionTrigger className="relative px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q3.question')}
                       </span>
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                    <AccordionContent className="relative px-6 pb-4 text-muted-foreground">
                       {t('thank.faq.q3.answer')}
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-4" className="rounded-xl border-2 border-blue-500/30 overflow-hidden backdrop-blur-md bg-gradient-to-r from-slate-950/80 via-neutral-900/60 to-orange-950/60">
-                    <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
+                  <AccordionItem value="item-4" className="relative rounded-xl border-2 border-primary/30 overflow-hidden backdrop-blur-md">
+                    <div className="absolute inset-0 bg-gradient-to-r from-background via-secondary/15 to-primary/20 pointer-events-none" />
+                    <AccordionTrigger className="relative px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q4.question')}
                       </span>
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                    <AccordionContent className="relative px-6 pb-4 text-muted-foreground">
                       {t('thank.faq.q4.answer')}
                     </AccordionContent>
                   </AccordionItem>
@@ -241,8 +245,9 @@ export const ThankPage = () => {
         </main>
 
         {/* Footer */}
-        <footer className="p-6 border-t-2 border-blue-500/30 bg-gradient-to-r from-slate-950 via-neutral-900 to-orange-950/80 backdrop-blur-md">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
+        <footer className="relative p-6 border-t-2 border-primary/30 backdrop-blur-md overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-secondary/20 to-primary/30" />
+          <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
             <p>© 2025 Zodiark. All rights reserved.</p>
           </div>
         </footer>
