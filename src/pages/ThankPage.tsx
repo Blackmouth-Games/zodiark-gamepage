@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { RewardStrip } from '@/components/RewardStrip';
 import { SocialLinks } from '@/components/SocialLinks';
 import { FireParticles } from '@/components/FireParticles';
 import { LanguageSelector } from '@/components/LanguageSelector';
@@ -14,7 +13,19 @@ import { trackEvent } from '@/utils/tracker';
 import thankYouBg from '@/assets/thank-you-bg.png';
 import specialEgg from '@/assets/special-egg.png';
 import starterPack from '@/assets/starter-pack.png';
+import zodiarkLogo from '@/assets/zodiark-logo.svg';
 import { CheckCircle2, XCircle, Bug, Home } from 'lucide-react';
+
+// Map reward IDs to images
+const REWARD_IMAGES: Record<string, string> = {
+  '77': starterPack,
+  '73': specialEgg,
+};
+
+const REWARD_NAMES: Record<string, string> = {
+  '77': 'Starter Pack',
+  '73': 'Special Egg',
+};
 
 export const ThankPage = () => {
   const { t, i18n } = useTranslation();
@@ -141,108 +152,128 @@ export const ThankPage = () => {
           <LanguageSelector />
         </header>
         
-        {/* Debug Panel with Test Buttons */}
+        {/* Debug Panel - Keep Real Debug Info */}
+        <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
+        
+        {/* Test Panel Overlay */}
         {debugOpen && (
-          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-            <div className="bg-card border border-primary/20 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-              <div className="p-6 border-b border-primary/20 flex justify-between items-center sticky top-0 bg-card z-10">
-                <h2 className="text-xl font-bold text-foreground">Debug Panel - Test API Responses</h2>
-                <Button variant="ghost" size="icon" onClick={() => setDebugOpen(false)}>
-                  <Bug className="w-4 h-4" />
-                </Button>
-              </div>
-
-              <div className="p-6 space-y-4">
-                <div className="space-y-3">
-                  <h3 className="text-lg font-semibold text-primary">Test API Responses</h3>
-                  <p className="text-sm text-muted-foreground">Click on any button to test different API response scenarios</p>
-                  
-                  <div className="grid grid-cols-1 gap-3">
-                    <Button
-                      onClick={testNotOK}
-                      variant="outline"
-                      className="w-full justify-start border-destructive/30 hover:bg-destructive/10"
-                    >
-                      <XCircle className="w-4 h-4 mr-2" />
-                      Test NOT_OK (Already claimed)
-                    </Button>
-                    
-                    <Button
-                      onClick={testOnly77}
-                      variant="outline"
-                      className="w-full justify-start border-primary/30 hover:bg-primary/10"
-                    >
-                      <CheckCircle2 className="w-4 h-4 mr-2" />
-                      Test OK - Only Starter Pack (77)
-                    </Button>
-                    
-                    <Button
-                      onClick={test77And73}
-                      variant="outline"
-                      className="w-full justify-start border-accent/30 hover:bg-accent/10"
-                    >
-                      <CheckCircle2 className="w-4 h-4 mr-2" />
-                      Test OK - Starter Pack (77) + Special Egg (73)
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
-                    Current result: {result ? JSON.stringify(result, null, 2) : 'None'}
-                  </p>
-                </div>
-              </div>
+          <div className="fixed top-20 right-4 bg-card border-2 border-primary/40 rounded-lg p-4 z-[60] max-w-sm shadow-2xl">
+            <h3 className="text-sm font-bold text-primary mb-3">🧪 Quick Test</h3>
+            <div className="space-y-2">
+              <Button
+                onClick={testNotOK}
+                size="sm"
+                variant="outline"
+                className="w-full justify-start text-xs border-destructive/30"
+              >
+                <XCircle className="w-3 h-3 mr-2" />
+                NOT_OK
+              </Button>
+              
+              <Button
+                onClick={testOnly77}
+                size="sm"
+                variant="outline"
+                className="w-full justify-start text-xs border-primary/30"
+              >
+                <CheckCircle2 className="w-3 h-3 mr-2" />
+                OK (77)
+              </Button>
+              
+              <Button
+                onClick={test77And73}
+                size="sm"
+                variant="outline"
+                className="w-full justify-start text-xs border-accent/30"
+              >
+                <CheckCircle2 className="w-3 h-3 mr-2" />
+                OK (77+73)
+              </Button>
             </div>
           </div>
         )}
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 gap-8 overflow-y-auto">
-          {/* Hero Section */}
-          <div className="text-center max-w-2xl">
-            {isSuccess && (
-              <>
-                <CheckCircle2 className="w-16 h-16 sm:w-20 sm:h-20 text-accent mx-auto mb-4 animate-pulse" />
-                <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-gradient-cosmic">
+          {/* Logo */}
+          <div className="flex justify-center">
+            <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
+          </div>
+
+          {/* Success State */}
+          {isSuccess && (
+            <>
+              <div className="text-center max-w-2xl relative">
+                <CheckCircle2 className="w-12 h-12 text-accent absolute -top-6 right-4 animate-pulse" />
+                <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-foreground">
                   {t('thank.title_ok')}
                 </h1>
-                <p className="text-base sm:text-xl text-muted-foreground">
+                <p className="text-base sm:text-xl text-muted-foreground mb-8">
                   {t('thank.sub_ok')}
                 </p>
-              </>
-            )}
-            {(isNotOK || isError) && (
-              <>
-                <XCircle className="w-16 h-16 sm:w-20 sm:h-20 text-destructive mx-auto mb-4" />
+              </div>
+
+              {/* Rewards - Large Images */}
+              {result.granted && result.granted.length > 0 && (
+                <div className="w-full max-w-4xl mx-auto">
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground">
+                    {t('thank.granted')}
+                  </h2>
+                  <div className="flex flex-wrap gap-8 justify-center items-center">
+                    {[...result.granted].sort((a, b) => {
+                      const idA = a.match(/\d+/)?.[0] || a;
+                      const idB = b.match(/\d+/)?.[0] || b;
+                      if (idA === '77') return -1;
+                      if (idB === '77') return 1;
+                      return 0;
+                    }).map((reward, index) => {
+                      const id = reward.match(/\d+/)?.[0] || reward;
+                      const image = REWARD_IMAGES[id];
+                      const name = REWARD_NAMES[id] || reward;
+                      
+                      return (
+                        <div key={index} className="flex flex-col items-center gap-4 animate-float" style={{ animationDelay: `${index * 0.2}s` }}>
+                          <div className="relative">
+                            <img 
+                              src={image} 
+                              alt={name} 
+                              className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain drop-shadow-2xl animate-glow"
+                            />
+                          </div>
+                          <div className="px-6 py-3 rounded-full bg-primary/20 border-2 border-primary/60">
+                            <span className="font-bold text-lg text-primary">{name}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* Error/NOT_OK State */}
+          {(isNotOK || isError) && (
+            <>
+              <div className="text-center max-w-2xl relative">
+                <XCircle className="w-12 h-12 text-destructive absolute -top-6 right-4" />
                 <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-foreground">
                   {t('thank.title_error')}
                 </h1>
-                <p className="text-base sm:text-xl text-destructive mb-6">
+                <p className="text-base sm:text-xl text-muted-foreground mb-6">
                   {getErrorMessage()}
                 </p>
-                <Button
-                  size="lg"
-                  onClick={handleRetry}
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground"
-                >
-                  {t('thank.retry')}
-                </Button>
-              </>
-            )}
-          </div>
+                <p className="text-sm text-muted-foreground mb-6">
+                  {t('thank.sub_ok')} {/* You've already participated - check FAQs below */}
+                </p>
+              </div>
+            </>
+          )}
 
-          {/* Success Content */}
-          {isSuccess && (
-            <>
-              {/* Rewards */}
-              {result.granted && result.granted.length > 0 && (
-                <RewardStrip rewards={result.granted} />
-              )}
-
-              {/* FAQ Section */}
+          {/* FAQ Section - Show for both success and error */}
+          {(isSuccess || isNotOK || isError) && (
               <div className="w-full max-w-3xl mx-auto">
-                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-cosmic-glow text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground text-center">
                   {t('thank.faq.title')}
                 </h2>
                 
@@ -318,7 +349,11 @@ export const ThankPage = () => {
                   </AccordionItem>
                 </Accordion>
               </div>
+          )}
 
+          {/* Success Only Content */}
+          {isSuccess && (
+            <>
               {/* Community Links */}
               <SocialLinks />
 
