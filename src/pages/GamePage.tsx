@@ -162,9 +162,8 @@ export const GamePage = () => {
         </main>
 
         {/* Footer */}
-        <footer className="relative p-6 border-t-2 border-primary/30 backdrop-blur-md overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-secondary/20 to-primary/30" />
-          <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
+        <footer className="p-6 border-t border-border backdrop-blur-md" style={{ background: 'var(--gradient-footer)' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
             <p>© 2025 Zodiark. All rights reserved.</p>
           </div>
         </footer>

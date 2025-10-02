@@ -8,59 +8,49 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Cosmic Dark Theme - inspired by Zodiark universe */
-    --background: 265 70% 8%;
-    --foreground: 45 100% 95%;
+    /* Colors from official repo - All HSL */
+    --background: 222 47% 7%;
+    --foreground: 38 100% 98%;
 
-    --card: 265 60% 12%;
-    --card-foreground: 45 100% 95%;
+    --card: 228 28% 12%;
+    --card-foreground: 38 100% 98%;
 
-    --popover: 265 70% 10%;
-    --popover-foreground: 45 100% 95%;
+    --popover: 228 28% 12%;
+    --popover-foreground: 38 100% 98%;
 
-    /* Primary: Cosmic Orange (matching original repo) */
     --primary: 31 100% 50%;
-    --primary-foreground: 265 70% 10%;
+    --primary-foreground: 222 47% 7%;
 
-    /* Secondary: Deep Space */
-    --secondary: 265 50% 18%;
-    --secondary-foreground: 45 100% 95%;
+    --secondary: 258 44% 40%;
+    --secondary-foreground: 38 100% 98%;
 
-    /* Muted: Darker cosmic tones */
-    --muted: 265 40% 20%;
-    --muted-foreground: 45 50% 75%;
+    --muted: 228 20% 20%;
+    --muted-foreground: 38 60% 70%;
 
-    /* Accent: Golden Orange (from brand) */
-    --accent: 38 100% 50%;
-    --accent-foreground: 265 70% 10%;
+    --accent: 31 100% 50%;
+    --accent-foreground: 222 47% 7%;
 
-    /* Destructive */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 45 100% 95%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 265 30% 25%;
-    --input: 265 40% 20%;
-    --ring: 38 100% 50%;
+    --border: 228 20% 25%;
+    --input: 228 20% 25%;
+    --ring: 31 100% 50%;
 
     --radius: 0.75rem;
 
-    /* Custom Cosmic Tokens */
-    --cosmic-glow: 38 100% 50%;
-    --cosmic-purple-light: 265 60% 35%;
-    --cosmic-purple-dark: 265 70% 15%;
-    --cosmic-orange: 38 100% 50%;
-    --cosmic-gold: 45 100% 60%;
+    /* Cosmic gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(222 47% 7%), hsl(258 44% 15%), hsl(31 100% 30%));
+    --gradient-hero: linear-gradient(180deg, hsl(222 47% 7% / 0.4), hsl(222 47% 7%));
+    --gradient-glow: radial-gradient(circle at center, hsl(31 100% 50% / 0.3), transparent 70%);
+    --gradient-footer: linear-gradient(90deg, hsl(222 47% 7%), hsl(228 28% 12%), hsl(31 40% 20%));
 
-    /* Gradients */
-    --gradient-cosmic: linear-gradient(135deg, hsl(265 70% 15%), hsl(265 55% 25%), hsl(38 100% 40%));
-    --gradient-glow: linear-gradient(180deg, hsl(265 70% 8% / 0.8), hsl(265 70% 8%));
-
-    /* Shadows & Effects */
-    --shadow-glow: 0 0 40px hsl(var(--cosmic-glow) / 0.3);
-    --shadow-card: 0 10px 40px hsl(265 70% 5% / 0.6);
+    /* Shadows */
+    --shadow-cosmic: 0 20px 60px -10px hsl(31 100% 50% / 0.4);
+    --shadow-glow: 0 0 80px hsl(31 100% 50% / 0.5);
 
     /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -70,9 +60,14 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
-    background: linear-gradient(135deg, hsl(265 70% 8%), hsl(265 50% 10%), hsl(0 0% 8%));
-    min-height: 100vh;
+    @apply bg-background text-foreground font-sans antialiased overflow-hidden;
+    background-image: var(--gradient-cosmic);
+    background-attachment: fixed;
+    overscroll-behavior: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
   }
 }
 
@@ -81,26 +76,30 @@ All colors MUST be HSL.
     text-shadow: 0 0 20px hsl(var(--primary) / 0.6);
   }
 
-  .text-cosmic-glow {
-    color: hsl(var(--cosmic-glow));
-    text-shadow: 0 0 20px hsl(var(--cosmic-glow) / 0.5);
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 
-  .text-gradient-cosmic {
-    background: linear-gradient(135deg, hsl(var(--cosmic-gold)), hsl(var(--cosmic-orange)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
   }
 
-  .glow-effect {
-    box-shadow: var(--shadow-glow);
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
   }
 
-  .card-cosmic {
-    background: hsl(var(--card));
-    box-shadow: var(--shadow-card);
-    border: 1px solid hsl(var(--border));
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.8);
+    }
   }
 
   /* Fire sparks effect - from original repo */
@@ -115,12 +114,12 @@ All colors MUST be HSL.
     position: absolute;
     width: var(--spark-size, 6px);
     height: var(--spark-size, 6px);
-    background: hsl(var(--cosmic-orange));
+    background: hsl(31 100% 50%);
     border-radius: 50%;
     opacity: 0;
     animation: fire-rise 8s ease-out infinite;
-    box-shadow: 0 0 15px hsl(var(--cosmic-orange)), 0 0 30px hsl(var(--cosmic-orange) / 0.7);
-    filter: blur(0.5px);
+    box-shadow: 0 0 10px hsl(31 100% 50%), 0 0 20px hsl(31 100% 50% / 0.6);
+    filter: blur(1px);
   }
 
   @keyframes fire-rise {
