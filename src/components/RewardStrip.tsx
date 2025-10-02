@@ -16,7 +16,7 @@ export const RewardStrip = ({ rewards }: RewardStripProps) => {
       <h3 className="text-xl font-semibold mb-4 text-center text-cosmic-glow">
         {t('thank.granted')}
       </h3>
-      <div className="rounded-xl border-2 border-primary/40 p-6 backdrop-blur-md bg-gradient-to-r from-purple-900/30 via-purple-800/20 to-amber-700/30">
+      <div className="rounded-xl border-2 border-blue-500/30 p-6 backdrop-blur-md bg-gradient-to-r from-slate-950/80 via-neutral-900/60 to-orange-950/60">
         <div className="flex flex-wrap gap-3 justify-center">
           {rewards.map((reward, index) => (
             <div
