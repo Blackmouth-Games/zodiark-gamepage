@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getTelegramUser } from '@/telegram/telegram';
 import { calculateCountdown, getTargetDate } from '@/utils/countdown';
+import type { RedeemResult } from '@/utils/api';
 
 interface APICall {
   timestamp: string;
@@ -18,9 +19,10 @@ interface APICall {
 interface DebugPanelProps {
   isOpen: boolean;
   onClose: () => void;
+  onTestResult?: (result: RedeemResult) => void;
 }
 
-export const DebugPanel = ({ isOpen, onClose }: DebugPanelProps) => {
+export const DebugPanel = ({ isOpen, onClose, onTestResult }: DebugPanelProps) => {
   const [apiCalls, setApiCalls] = useState<APICall[]>([]);
   const [expandedCall, setExpandedCall] = useState<number | null>(null);
   const [countdown, setCountdown] = useState(calculateCountdown());
@@ -74,8 +76,9 @@ Opacity: ${opacity}`;
         {/* Tabs Content */}
         <div className="flex-1 overflow-y-auto p-4">
           <Tabs defaultValue="info" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsList className="grid w-full grid-cols-3 mb-4">
               <TabsTrigger value="info">API & Telegram Info</TabsTrigger>
+              <TabsTrigger value="test">🧪 Quick Test</TabsTrigger>
               <TabsTrigger value="tools">🎨 Design Tools</TabsTrigger>
             </TabsList>
 
@@ -185,7 +188,91 @@ Opacity: ${opacity}`;
               </div>
             </TabsContent>
 
-            {/* Tab 2: Design Tools */}
+            {/* Tab 2: Quick Test */}
+            <TabsContent value="test" className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-3">🧪 Quick Test - API Response Simulation</h3>
+                <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Simula diferentes respuestas de la API para probar los distintos estados de la página de agradecimiento.
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <Button
+                      onClick={() => {
+                        if (onTestResult) {
+                          onTestResult({
+                            status: 'NOT_OK',
+                            reason: 'ALREADY_OWN_77',
+                            granted: []
+                          });
+                        }
+                      }}
+                      size="lg"
+                      variant="outline"
+                      className="w-full justify-start border-destructive/30 hover:bg-destructive/10"
+                    >
+                      <XCircle className="w-5 h-5 mr-3" />
+                      <div className="text-left">
+                        <div className="font-semibold">NOT_OK</div>
+                        <div className="text-xs text-muted-foreground">Usuario ya posee el reward 77</div>
+                      </div>
+                    </Button>
+                    
+                    <Button
+                      onClick={() => {
+                        if (onTestResult) {
+                          onTestResult({
+                            status: 'OK',
+                            granted: ['77']
+                          });
+                        }
+                      }}
+                      size="lg"
+                      variant="outline"
+                      className="w-full justify-start border-primary/30 hover:bg-primary/10"
+                    >
+                      <CheckCircle2 className="w-5 h-5 mr-3" />
+                      <div className="text-left">
+                        <div className="font-semibold">OK (77)</div>
+                        <div className="text-xs text-muted-foreground">Solo Starter Pack otorgado</div>
+                      </div>
+                    </Button>
+                    
+                    <Button
+                      onClick={() => {
+                        if (onTestResult) {
+                          onTestResult({
+                            status: 'OK',
+                            granted: ['77', '73']
+                          });
+                        }
+                      }}
+                      size="lg"
+                      variant="outline"
+                      className="w-full justify-start border-accent/30 hover:bg-accent/10"
+                    >
+                      <CheckCircle2 className="w-5 h-5 mr-3" />
+                      <div className="text-left">
+                        <div className="font-semibold">OK (77+73)</div>
+                        <div className="text-xs text-muted-foreground">Starter Pack + Special Egg otorgados</div>
+                      </div>
+                    </Button>
+                  </div>
+
+                  <div className="mt-6 p-4 bg-background/80 rounded border border-border">
+                    <p className="text-xs text-accent font-semibold mb-2">ℹ️ Información:</p>
+                    <ul className="text-xs text-muted-foreground space-y-1">
+                      <li>• <strong>NOT_OK:</strong> Muestra mensaje de error con FAQs</li>
+                      <li>• <strong>OK (77):</strong> Muestra solo el Starter Pack</li>
+                      <li>• <strong>OK (77+73):</strong> Muestra ambos rewards (Starter Pack primero)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Tab 3: Design Tools */}
             <TabsContent value="tools" className="space-y-6">
               {/* Color Picker Tool */}
               <div>

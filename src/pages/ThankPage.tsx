@@ -33,32 +33,6 @@ export const ThankPage = () => {
   const [result, setResult] = useState<RedeemResult | null>(null);
   const [debugOpen, setDebugOpen] = useState(false);
 
-  // Test functions for debug
-  const testNotOK = () => {
-    const testResult: RedeemResult = {
-      status: 'NOT_OK',
-      reason: 'ALREADY_OWN_77',
-      granted: []
-    };
-    setResult(testResult);
-  };
-
-  const testOnly77 = () => {
-    const testResult: RedeemResult = {
-      status: 'OK',
-      granted: ['77']
-    };
-    setResult(testResult);
-  };
-
-  const test77And73 = () => {
-    const testResult: RedeemResult = {
-      status: 'OK',
-      granted: ['77', '73']
-    };
-    setResult(testResult);
-  };
-
   useEffect(() => {
     // Get and clear result from sessionStorage
     const storedResult = getAndClearRedeemResult();
@@ -152,46 +126,12 @@ export const ThankPage = () => {
           <LanguageSelector />
         </header>
         
-        {/* Debug Panel - Keep Real Debug Info */}
-        <DebugPanel isOpen={debugOpen} onClose={() => setDebugOpen(false)} />
-        
-        {/* Test Panel Overlay - Only when debug is open */}
-        {debugOpen && (
-          <div className="fixed top-20 right-4 bg-card border-2 border-primary/40 rounded-lg p-4 z-[60] max-w-sm shadow-2xl">
-            <h3 className="text-sm font-bold text-primary mb-3">🧪 Quick Test</h3>
-            <div className="space-y-2">
-              <Button
-                onClick={testNotOK}
-                size="sm"
-                variant="outline"
-                className="w-full justify-start text-xs border-destructive/30"
-              >
-                <XCircle className="w-3 h-3 mr-2" />
-                NOT_OK
-              </Button>
-              
-              <Button
-                onClick={testOnly77}
-                size="sm"
-                variant="outline"
-                className="w-full justify-start text-xs border-primary/30"
-              >
-                <CheckCircle2 className="w-3 h-3 mr-2" />
-                OK (77)
-              </Button>
-              
-              <Button
-                onClick={test77And73}
-                size="sm"
-                variant="outline"
-                className="w-full justify-start text-xs border-accent/30"
-              >
-                <CheckCircle2 className="w-3 h-3 mr-2" />
-                OK (77+73)
-              </Button>
-            </div>
-          </div>
-        )}
+        {/* Debug Panel with Quick Test */}
+        <DebugPanel 
+          isOpen={debugOpen} 
+          onClose={() => setDebugOpen(false)}
+          onTestResult={(testResult) => setResult(testResult)}
+        />
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 gap-8 overflow-y-auto">
