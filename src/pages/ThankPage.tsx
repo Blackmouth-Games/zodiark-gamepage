@@ -85,7 +85,7 @@ export const ThankPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative overflow-y-auto">
       {/* Test Mode Banner */}
       <TestModeBanner />
       
@@ -100,7 +100,7 @@ export const ThankPage = () => {
       <div className="fixed inset-0 bg-gradient-to-b from-transparent via-black/30 to-background/80 z-0" />
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col">
+      <div className="relative z-10 flex flex-col">
         {/* Header */}
         <header className="p-4 sm:p-6 flex justify-between items-center">
           <div className="flex gap-2">
@@ -134,7 +134,7 @@ export const ThankPage = () => {
         />
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 gap-8">
+        <main className="flex flex-col items-center justify-start px-4 py-8 gap-8 pb-16">
           {/* Logo */}
           <div className="flex justify-center">
             <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
