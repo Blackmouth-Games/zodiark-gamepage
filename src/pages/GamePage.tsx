@@ -162,8 +162,12 @@ export const GamePage = () => {
         </main>
 
         {/* Footer */}
-        <footer className="p-6 border-t border-border backdrop-blur-md" style={{ background: 'var(--gradient-footer)' }}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
+        <footer className="relative p-6 border-t-2 backdrop-blur-md overflow-hidden" style={{ borderColor: '#33384d' }}>
+          <div className="absolute inset-0" style={{ 
+            background: 'linear-gradient(to right, #17162b, #2d2027, #563414)',
+            opacity: 0.6
+          }} />
+          <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
             <p>© 2025 Zodiark. All rights reserved.</p>
           </div>
         </footer>
