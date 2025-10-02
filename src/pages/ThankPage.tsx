@@ -168,7 +168,7 @@ export const ThankPage = () => {
                 </h2>
                 
                 <Accordion type="single" collapsible className="space-y-4">
-                  <AccordionItem value="item-1" className="rounded-xl border-2 border-accent/40 overflow-hidden backdrop-blur-md bg-gradient-to-b from-card/50 to-card/80 shadow-glow">
+                  <AccordionItem value="item-1" className="rounded-xl border-2 border-primary/40 overflow-hidden backdrop-blur-md bg-gradient-to-r from-purple-900/30 via-purple-800/20 to-amber-700/30">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q1.question')}
@@ -189,7 +189,7 @@ export const ThankPage = () => {
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="rounded-xl border-2 border-accent/40 overflow-hidden backdrop-blur-md bg-gradient-to-b from-card/50 to-card/80 shadow-glow">
+                  <AccordionItem value="item-2" className="rounded-xl border-2 border-primary/40 overflow-hidden backdrop-blur-md bg-gradient-to-r from-purple-900/30 via-purple-800/20 to-amber-700/30">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q2.question')}
@@ -200,7 +200,7 @@ export const ThankPage = () => {
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="rounded-xl border-2 border-accent/40 overflow-hidden backdrop-blur-md bg-gradient-to-b from-card/50 to-card/80 shadow-glow">
+                  <AccordionItem value="item-3" className="rounded-xl border-2 border-primary/40 overflow-hidden backdrop-blur-md bg-gradient-to-r from-purple-900/30 via-purple-800/20 to-amber-700/30">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q3.question')}
@@ -211,7 +211,7 @@ export const ThankPage = () => {
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-4" className="rounded-xl border-2 border-accent/40 overflow-hidden backdrop-blur-md bg-gradient-to-b from-card/50 to-card/80 shadow-glow">
+                  <AccordionItem value="item-4" className="rounded-xl border-2 border-primary/40 overflow-hidden backdrop-blur-md bg-gradient-to-r from-purple-900/30 via-purple-800/20 to-amber-700/30">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-primary/5 transition-colors">
                       <span className="text-left font-semibold text-foreground">
                         {t('thank.faq.q4.question')}
@@ -241,7 +241,7 @@ export const ThankPage = () => {
         </main>
 
         {/* Footer */}
-        <footer className="p-6 border-t-2 border-accent/40 bg-gradient-to-b from-background/80 to-background backdrop-blur-md shadow-glow">
+        <footer className="p-6 border-t-2 border-primary/40 bg-gradient-to-r from-purple-900/40 via-purple-800/30 to-amber-700/40 backdrop-blur-md">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground">
             <p>© 2025 Zodiark. All rights reserved.</p>
           </div>
