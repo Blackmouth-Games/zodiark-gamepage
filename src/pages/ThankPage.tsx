@@ -85,7 +85,7 @@ export const ThankPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
+    <div className="min-h-screen flex flex-col relative">
       {/* Test Mode Banner */}
       <TestModeBanner />
       
@@ -100,7 +100,7 @@ export const ThankPage = () => {
       <div className="fixed inset-0 bg-gradient-to-b from-transparent via-black/30 to-background/80 z-0" />
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col overflow-y-auto">
+      <div className="relative z-10 flex-1 flex flex-col">
         {/* Header */}
         <header className="p-4 sm:p-6 flex justify-between items-center">
           <div className="flex gap-2">
@@ -134,7 +134,7 @@ export const ThankPage = () => {
         />
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 gap-8 overflow-y-auto">
+        <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 gap-8">
           {/* Logo */}
           <div className="flex justify-center">
             <img src={zodiarkLogo} alt="Zodiark" className="h-16 sm:h-20 md:h-24" />
@@ -143,14 +143,16 @@ export const ThankPage = () => {
           {/* Success State */}
           {isSuccess && (
             <>
-              <div className="text-center max-w-2xl relative">
-                <CheckCircle2 className="w-12 h-12 text-accent absolute -top-6 right-4 animate-pulse" />
-                <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-foreground">
-                  {t('thank.title_ok')}
-                </h1>
-                <p className="text-base sm:text-xl text-muted-foreground mb-8">
-                  {t('thank.sub_ok')}
-                </p>
+              <div className="text-center max-w-2xl relative flex flex-col items-center gap-4">
+                <CheckCircle2 className="w-16 h-16 text-accent animate-pulse" />
+                <div>
+                  <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-foreground">
+                    {t('thank.title_ok')}
+                  </h1>
+                  <p className="text-base sm:text-xl text-muted-foreground mb-8">
+                    {t('thank.sub_ok')}
+                  </p>
+                </div>
               </div>
 
               {/* Rewards - Large Images */}
@@ -177,12 +179,10 @@ export const ThankPage = () => {
                             <img 
                               src={image} 
                               alt={name} 
-                              className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain drop-shadow-2xl animate-glow"
+                              className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 object-contain drop-shadow-2xl"
                             />
                           </div>
-                          <div className="px-6 py-3 rounded-full bg-primary/20 border-2 border-primary/60">
-                            <span className="font-bold text-lg text-primary">{name}</span>
-                          </div>
+                          <span className="font-bold text-xl text-foreground">{name}</span>
                         </div>
                       );
                     })}
@@ -195,14 +195,16 @@ export const ThankPage = () => {
           {/* Error/NOT_OK State */}
           {(isNotOK || isError) && (
             <>
-              <div className="text-center max-w-2xl relative">
-                <XCircle className="w-12 h-12 text-destructive absolute -top-6 right-4" />
-                <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-foreground">
-                  {t('thank.title_error')}
-                </h1>
-                <p className="text-base sm:text-xl text-muted-foreground mb-6">
-                  {getErrorMessage()}
-                </p>
+              <div className="text-center max-w-2xl relative flex flex-col items-center gap-4">
+                <XCircle className="w-16 h-16 text-destructive" />
+                <div>
+                  <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-foreground">
+                    {t('thank.title_error')}
+                  </h1>
+                  <p className="text-base sm:text-xl text-muted-foreground mb-6">
+                    {getErrorMessage()}
+                  </p>
+                </div>
               </div>
             </>
           )}
