@@ -1,6 +1,7 @@
 /**
  * API Client for Redeem Endpoint
  */
+import webhooksConfig from '@/config/webhooks.json';
 
 export interface RedeemRequest {
   tg_id: string;
@@ -25,66 +26,129 @@ export interface RedeemResult {
 }
 
 /**
- * Call /redeem endpoint
+ * Parse webhook response string
+ * Examples:
+ * - "OK {granted:[77,73]}"
+ * - "OK {granted:[77]}"
+ * - "NOT_OK {reason: ALREADY_OWN_77}"
+ */
+const parseWebhookResponse = (responseText: string): RedeemResult => {
+  try {
+    // Check if it's OK or NOT_OK
+    if (responseText.startsWith('OK')) {
+      // Extract granted array from "OK {granted:[77,73]}"
+      const grantedMatch = responseText.match(/granted:\[([^\]]+)\]/);
+      if (grantedMatch) {
+        const grantedIds = grantedMatch[1].split(',').map(id => id.trim());
+        return {
+          status: 'OK',
+          granted: grantedIds,
+        };
+      }
+      // If no granted found, return OK with empty array
+      return { status: 'OK', granted: [] };
+    } else if (responseText.startsWith('NOT_OK')) {
+      // Extract reason from "NOT_OK {reason: ALREADY_OWN_77}"
+      const reasonMatch = responseText.match(/reason:\s*([^}]+)/);
+      if (reasonMatch) {
+        return {
+          status: 'NOT_OK',
+          reason: reasonMatch[1].trim(),
+        };
+      }
+      return { status: 'NOT_OK', reason: 'UNKNOWN' };
+    }
+    
+    // Unexpected format
+    console.error('Unexpected webhook response format:', responseText);
+    return { status: 'ERROR' };
+  } catch (error) {
+    console.error('Error parsing webhook response:', error);
+    return { status: 'ERROR' };
+  }
+};
+
+/**
+ * Call claim reward webhook
  */
 export const callRedeemAPI = async (
   tg_id: string,
   lang: string
 ): Promise<RedeemResult> => {
   const clicked_at = new Date().toISOString();
-  const requestBody = { tg_id, lang, clicked_at } as RedeemRequest;
+  const requestData = { tg_id, lang, clicked_at };
 
   try {
-    const response = await fetch('/redeem', {
-      method: 'POST',
+    // Build query string for GET request
+    const queryParams = new URLSearchParams({
+      tg_id: requestData.tg_id,
+      lang: requestData.lang,
+      clicked_at: requestData.clicked_at,
+    });
+
+    const webhookUrl = `${webhooksConfig.claim_reward_webhook}?${queryParams}`;
+
+    const response = await fetch(webhookUrl, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody),
       signal: AbortSignal.timeout(10000), // 10s timeout
     });
 
-    const data: RedeemResponse = await response.json();
+    const responseText = await response.text();
+    
+    // Try to parse as JSON first, fallback to text
+    let responseData;
+    try {
+      responseData = JSON.parse(responseText);
+      // If it's JSON with a "result" field, use that
+      if (responseData && typeof responseData === 'object' && 'result' in responseData) {
+        responseData = responseData.result;
+      }
+    } catch {
+      // If not JSON, use the text directly
+      responseData = responseText;
+    }
 
-    // Store API call for debug panel
-    const debugCall = {
+    // Store webhook call for debug panel
+    const webhookCall = {
       timestamp: new Date().toLocaleString(),
-      endpoint: '/redeem',
-      request: requestBody,
-      response: data,
+      endpoint: webhooksConfig.claim_reward_webhook,
+      request: requestData,
+      response: responseData,
       status: response.status,
-      apiUrl: window.location.origin + '/redeem',
     };
     
-    const existingCalls = JSON.parse(sessionStorage.getItem('debug_api_calls') || '[]');
-    sessionStorage.setItem('debug_api_calls', JSON.stringify([...existingCalls, debugCall]));
+    const existingCalls = JSON.parse(sessionStorage.getItem('debug_webhook_calls') || '[]');
+    existingCalls.unshift(webhookCall);
+    sessionStorage.setItem('debug_webhook_calls', JSON.stringify(existingCalls.slice(0, 50)));
 
     if (!response.ok) {
-      console.error('Redeem API returned non-200:', response.status);
+      console.error('Webhook returned non-200:', response.status);
       return { status: 'ERROR' };
     }
 
-    // Check if response has 'granted' property (OK case)
-    if ('granted' in data) {
-      return {
-        status: 'OK',
-        granted: data.granted,
-      };
-    }
-
-    // Otherwise it's NOT_OK with reason
-    if ('reason' in data) {
-      return {
-        status: 'NOT_OK',
-        reason: data.reason,
-      };
-    }
-
-    // Unexpected response format
-    console.error('Unexpected redeem response format:', data);
-    return { status: 'ERROR' };
+    // Parse the response (which is a string like "OK {granted:[77,73]}")
+    const result = parseWebhookResponse(typeof responseData === 'string' ? responseData : JSON.stringify(responseData));
+    return result;
   } catch (error) {
-    console.error('Redeem API error:', error);
+    console.error('Webhook error:', error);
+    
+    // Store error in debug panel
+    const webhookCall = {
+      timestamp: new Date().toLocaleString(),
+      endpoint: webhooksConfig.claim_reward_webhook,
+      request: requestData,
+      response: null,
+      status: 0,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+    
+    const existingCalls = JSON.parse(sessionStorage.getItem('debug_webhook_calls') || '[]');
+    existingCalls.unshift(webhookCall);
+    sessionStorage.setItem('debug_webhook_calls', JSON.stringify(existingCalls.slice(0, 50)));
+    
     return { status: 'ERROR' };
   }
 };

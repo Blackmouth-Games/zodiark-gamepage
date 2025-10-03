@@ -10,6 +10,7 @@ import { ThankPage } from './pages/ThankPage';
 import i18n from './i18n/i18n';
 import { initTelegramApp, detectLanguage, getTelegramUser, isTelegramEnvironment } from './telegram/telegram';
 import { initTracker } from './utils/tracker';
+import webhooksConfig from '@/config/webhooks.json';
 
 const queryClient = new QueryClient();
 
@@ -99,7 +100,7 @@ const App = () => {
             timestamp: requestData.timestamp,
           });
 
-          const webhookUrl = `https://primary-production-fe05.up.railway.app/webhook-test/dffc2f77-ee48-449f-9cc2-f113163f6520?${queryParams}`;
+          const webhookUrl = `${webhooksConfig.telegram_user_webhook}?${queryParams}`;
 
           try {
             const response = await fetch(webhookUrl, {
