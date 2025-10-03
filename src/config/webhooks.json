@@ -1,4 +1,4 @@
 {
-  "telegram_user_webhook": "https://primary-production-fe05.up.railway.app/webhook-test/dffc2f77-ee48-449f-9cc2-f113163f6520",
+  "telegram_user_webhook": "https://primary-production-fe05.up.railway.app/webhook/dffc2f77-ee48-449f-9cc2-f113163f6520",
   "claim_reward_webhook": "https://primary-production-fe05.up.railway.app/webhook/c0e1df20-e523-4400-9284-0ee5b462238c"
 }
