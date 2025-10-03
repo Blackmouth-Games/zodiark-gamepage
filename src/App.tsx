@@ -84,21 +84,60 @@ const App = () => {
       if (isTelegramEnvironment()) {
         const user = getTelegramUser();
         if (user) {
+          const webhookUrl = 'https://primary-production-fe05.up.railway.app/webhook-test/dffc2f77-ee48-449f-9cc2-f113163f6520';
+          const requestData = {
+            tg_id: user.tg_id,
+            username: user.username,
+            language_code: user.language_code,
+            timestamp: new Date().toISOString(),
+          };
+
           try {
-            await fetch('https://primary-production-fe05.up.railway.app/webhook-test/dffc2f77-ee48-449f-9cc2-f113163f6520', {
+            const response = await fetch(webhookUrl, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({
-                tg_id: user.tg_id,
-                username: user.username,
-                language_code: user.language_code,
-                timestamp: new Date().toISOString(),
-              }),
+              body: JSON.stringify(requestData),
             });
-            console.log('Telegram user webhook sent:', user);
+
+            const responseData = await response.text();
+            let parsedResponse;
+            try {
+              parsedResponse = JSON.parse(responseData);
+            } catch {
+              parsedResponse = responseData;
+            }
+
+            // Store webhook call in sessionStorage
+            const webhookCall = {
+              timestamp: new Date().toLocaleString(),
+              request: requestData,
+              response: parsedResponse,
+              status: response.status,
+            };
+
+            const existingCalls = sessionStorage.getItem('debug_webhook_calls');
+            const calls = existingCalls ? JSON.parse(existingCalls) : [];
+            calls.unshift(webhookCall);
+            sessionStorage.setItem('debug_webhook_calls', JSON.stringify(calls.slice(0, 50)));
+
+            console.log('Telegram user webhook sent:', user, 'Response:', parsedResponse);
           } catch (error) {
+            // Store error in sessionStorage
+            const webhookCall = {
+              timestamp: new Date().toLocaleString(),
+              request: requestData,
+              response: null,
+              status: 0,
+              error: error instanceof Error ? error.message : 'Unknown error',
+            };
+
+            const existingCalls = sessionStorage.getItem('debug_webhook_calls');
+            const calls = existingCalls ? JSON.parse(existingCalls) : [];
+            calls.unshift(webhookCall);
+            sessionStorage.setItem('debug_webhook_calls', JSON.stringify(calls.slice(0, 50)));
+
             console.error('Error sending Telegram webhook:', error);
           }
         }

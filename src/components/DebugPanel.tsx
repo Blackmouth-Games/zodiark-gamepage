@@ -16,6 +16,14 @@ interface APICall {
   apiUrl?: string;
 }
 
+interface WebhookCall {
+  timestamp: string;
+  request: any;
+  response: any;
+  status: number;
+  error?: string;
+}
+
 interface DebugPanelProps {
   isOpen: boolean;
   onClose: () => void;
@@ -24,7 +32,9 @@ interface DebugPanelProps {
 
 export const DebugPanel = ({ isOpen, onClose, onTestResult }: DebugPanelProps) => {
   const [apiCalls, setApiCalls] = useState<APICall[]>([]);
+  const [webhookCalls, setWebhookCalls] = useState<WebhookCall[]>([]);
   const [expandedCall, setExpandedCall] = useState<number | null>(null);
+  const [expandedWebhook, setExpandedWebhook] = useState<number | null>(null);
   const [countdown, setCountdown] = useState(calculateCountdown());
   const telegramUser = getTelegramUser();
   
@@ -40,6 +50,12 @@ export const DebugPanel = ({ isOpen, onClose, onTestResult }: DebugPanelProps) =
     const stored = sessionStorage.getItem('debug_api_calls');
     if (stored) {
       setApiCalls(JSON.parse(stored));
+    }
+
+    // Get webhook calls from sessionStorage
+    const storedWebhooks = sessionStorage.getItem('debug_webhook_calls');
+    if (storedWebhooks) {
+      setWebhookCalls(JSON.parse(storedWebhooks));
     }
     
     // Update countdown every second when panel is open
@@ -76,10 +92,11 @@ Opacity: ${opacity}`;
         {/* Tabs Content */}
         <div className="flex-1 overflow-y-auto p-4">
           <Tabs defaultValue="info" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-4">
-              <TabsTrigger value="info">API & Telegram Info</TabsTrigger>
-              <TabsTrigger value="test">🧪 Quick Test</TabsTrigger>
-              <TabsTrigger value="tools">🎨 Design Tools</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 mb-4">
+              <TabsTrigger value="info">API Info</TabsTrigger>
+              <TabsTrigger value="webhooks">Webhooks</TabsTrigger>
+              <TabsTrigger value="test">🧪 Test</TabsTrigger>
+              <TabsTrigger value="tools">🎨 Tools</TabsTrigger>
             </TabsList>
 
             {/* Tab 1: API & Telegram Info */}
@@ -179,6 +196,70 @@ Opacity: ${opacity}`;
                                 {JSON.stringify(call.response, null, 2)}
                               </pre>
                             </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+
+            {/* Tab 2: Webhook History */}
+            <TabsContent value="webhooks" className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold mb-3">Webhook History</h3>
+                {webhookCalls.length === 0 ? (
+                  <p className="text-muted-foreground">No webhook calls recorded yet</p>
+                ) : (
+                  <div className="space-y-2">
+                    {webhookCalls.map((call, index) => (
+                      <div key={index} className="border rounded-lg overflow-hidden">
+                        <button
+                          onClick={() => setExpandedWebhook(expandedWebhook === index ? null : index)}
+                          className="w-full p-3 flex items-center gap-3 hover:bg-muted/30 transition-colors"
+                        >
+                          <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                            call.status >= 200 && call.status < 300 
+                              ? 'bg-green-500/20 text-green-400' 
+                              : call.error
+                              ? 'bg-red-500/20 text-red-400'
+                              : 'bg-yellow-500/20 text-yellow-400'
+                          }`}>
+                            {call.error ? 'ERROR' : call.status}
+                          </span>
+                          <span className="font-mono text-sm">Telegram Webhook</span>
+                          <span className="text-xs text-muted-foreground ml-auto">{call.timestamp}</span>
+                          {expandedWebhook === index ? (
+                            <ChevronUp className="w-4 h-4" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4" />
+                          )}
+                        </button>
+                        
+                        {expandedWebhook === index && (
+                          <div className="p-4 bg-muted/10 border-t space-y-3">
+                            <div>
+                              <p className="text-xs font-semibold text-muted-foreground mb-1">Request</p>
+                              <pre className="bg-background/50 p-2 rounded text-xs overflow-x-auto">
+                                {JSON.stringify(call.request, null, 2)}
+                              </pre>
+                            </div>
+                            {call.error ? (
+                              <div>
+                                <p className="text-xs font-semibold text-red-400 mb-1">Error</p>
+                                <pre className="bg-background/50 p-2 rounded text-xs overflow-x-auto text-red-400">
+                                  {call.error}
+                                </pre>
+                              </div>
+                            ) : (
+                              <div>
+                                <p className="text-xs font-semibold text-muted-foreground mb-1">Response</p>
+                                <pre className="bg-background/50 p-2 rounded text-xs overflow-x-auto">
+                                  {JSON.stringify(call.response, null, 2)}
+                                </pre>
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>
