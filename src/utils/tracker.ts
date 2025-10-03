@@ -1,12 +1,12 @@
 /**
  * lkTracker Integration
- * Wrapper for agency tracking events with readiness queue and idempotency
+ * Wrapper for marketing tracking events with readiness queue and idempotency
  */
 
 declare global {
   interface Window {
     lkTracker?: {
-      track: (eventName: string, properties?: Record<string, unknown>) => void;
+      trackEvent: (eventName: string) => void;
     };
   }
 }
@@ -26,10 +26,10 @@ let isTrackerReady = false;
 let firedEvents = new Set<string>();
 
 /**
- * Check if tracker is loaded
+ * Check if lkTracker is loaded
  */
 const checkTrackerReady = (): boolean => {
-  return typeof window.lkTracker !== 'undefined' && typeof window.lkTracker.track === 'function';
+  return typeof window.lkTracker !== 'undefined' && typeof window.lkTracker.trackEvent === 'function';
 };
 
 /**
@@ -74,7 +74,7 @@ const flushQueue = (): void => {
 };
 
 /**
- * Internal track function
+ * Internal track function - calls lkTracker.trackEvent
  */
 const trackEventInternal = (eventName: TrackerEvent, properties?: Record<string, unknown>): void => {
   if (!window.lkTracker) {
@@ -83,10 +83,11 @@ const trackEventInternal = (eventName: TrackerEvent, properties?: Record<string,
   }
 
   try {
-    window.lkTracker.track(eventName, properties);
-    console.log(`[Tracker] Event fired: ${eventName}`, properties);
+    // lkTracker.trackEvent only accepts event name (no properties parameter)
+    window.lkTracker.trackEvent(eventName);
+    console.log(`[lkTracker] Event fired: ${eventName}`, properties || '');
   } catch (error) {
-    console.error(`[Tracker] Error firing event: ${eventName}`, error);
+    console.error(`[lkTracker] Error firing event: ${eventName}`, error);
   }
 };
 
