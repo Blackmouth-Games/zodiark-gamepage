@@ -79,20 +79,12 @@ export const callRedeemAPI = async (
   const requestData = { tg_id, lang, clicked_at };
 
   try {
-    // Build query string for GET request
-    const queryParams = new URLSearchParams({
-      tg_id: requestData.tg_id,
-      lang: requestData.lang,
-      clicked_at: requestData.clicked_at,
-    });
-
-    const webhookUrl = `${webhooksConfig.claim_reward_webhook}?${queryParams}`;
-
-    const response = await fetch(webhookUrl, {
-      method: 'GET',
+    const response = await fetch(webhooksConfig.claim_reward_webhook, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify(requestData),
       signal: AbortSignal.timeout(10000), // 10s timeout
     });
 
