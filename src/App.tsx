@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { GamePage } from './pages/GamePage';
 import { ThankPage } from './pages/ThankPage';
 import i18n from './i18n/i18n';
-import { initTelegramApp, detectLanguage } from './telegram/telegram';
+import { initTelegramApp, detectLanguage, getTelegramUser, isTelegramEnvironment } from './telegram/telegram';
 import { initTracker } from './utils/tracker';
 
 const queryClient = new QueryClient();
@@ -78,6 +78,34 @@ const App = () => {
 
     // Initialize tracker
     initTracker();
+
+    // Send webhook if accessing from Telegram
+    const sendTelegramWebhook = async () => {
+      if (isTelegramEnvironment()) {
+        const user = getTelegramUser();
+        if (user) {
+          try {
+            await fetch('https://primary-production-fe05.up.railway.app/webhook-test/dffc2f77-ee48-449f-9cc2-f113163f6520', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                tg_id: user.tg_id,
+                username: user.username,
+                language_code: user.language_code,
+                timestamp: new Date().toISOString(),
+              }),
+            });
+            console.log('Telegram user webhook sent:', user);
+          } catch (error) {
+            console.error('Error sending Telegram webhook:', error);
+          }
+        }
+      }
+    };
+
+    sendTelegramWebhook();
   }, []);
 
   return (
