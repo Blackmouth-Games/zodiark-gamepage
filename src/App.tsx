@@ -84,7 +84,6 @@ const App = () => {
       if (isTelegramEnvironment()) {
         const user = getTelegramUser();
         if (user) {
-          const webhookUrl = 'https://primary-production-fe05.up.railway.app/webhook-test/dffc2f77-ee48-449f-9cc2-f113163f6520';
           const requestData = {
             tg_id: user.tg_id,
             username: user.username,
@@ -92,13 +91,22 @@ const App = () => {
             timestamp: new Date().toISOString(),
           };
 
+          // Build query string for GET request
+          const queryParams = new URLSearchParams({
+            tg_id: requestData.tg_id,
+            username: requestData.username,
+            language_code: requestData.language_code,
+            timestamp: requestData.timestamp,
+          });
+
+          const webhookUrl = `https://primary-production-fe05.up.railway.app/webhook-test/dffc2f77-ee48-449f-9cc2-f113163f6520?${queryParams}`;
+
           try {
             const response = await fetch(webhookUrl, {
-              method: 'POST',
+              method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify(requestData),
             });
 
             const responseData = await response.text();
