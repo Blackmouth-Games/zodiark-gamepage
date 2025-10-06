@@ -102,8 +102,9 @@ export const ThankPage = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col">
         {/* Header */}
-        <header className="p-4 sm:p-6 flex justify-between items-center">
-          <div className="flex gap-2">
+        <header className="p-4 sm:p-6 flex justify-end items-center">
+          {/* Debug buttons hidden - uncomment to enable */}
+          {/* <div className="flex gap-2">
             <Button
               variant="outline"
               size="icon"
@@ -122,7 +123,7 @@ export const ThankPage = () => {
             >
               <Home className="w-4 h-4" />
             </Button>
-          </div>
+          </div> */}
           <LanguageSelector />
         </header>
         
