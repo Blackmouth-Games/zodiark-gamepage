@@ -26,6 +26,12 @@ export const GamePage = () => {
     // Track page view when component is ready and i18n is initialized
     if (i18n.isInitialized) {
       trackEvent('lp_page_view');
+      
+      // Track Google Ads conversion when page loads
+      if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+        (window as any).gtag_report_conversion();
+      }
+      
       setIsReady(true);
     }
   }, [i18n.isInitialized]);
