@@ -69,13 +69,14 @@ const parseWebhookResponse = (responseText: string): RedeemResult => {
 };
 
 /**
- * Call claim reward webhook
+ * Call claim reward webhook (legacy - kept for backwards compatibility)
+ * This call is made but its result is not used
  */
-export const callRedeemAPI = async (
+const callLegacyWebhook = async (
   tg_id: string,
-  lang: string
-): Promise<RedeemResult> => {
-  const clicked_at = new Date().toISOString();
+  lang: string,
+  clicked_at: string
+): Promise<void> => {
   const requestData = { tg_id, lang, clicked_at };
 
   try {
@@ -94,12 +95,10 @@ export const callRedeemAPI = async (
     let responseData;
     try {
       responseData = JSON.parse(responseText);
-      // If it's JSON with a "result" field, use that
       if (responseData && typeof responseData === 'object' && 'result' in responseData) {
         responseData = responseData.result;
       }
     } catch {
-      // If not JSON, use the text directly
       responseData = responseText;
     }
 
@@ -115,23 +114,14 @@ export const callRedeemAPI = async (
     const existingCalls = JSON.parse(sessionStorage.getItem('debug_webhook_calls') || '[]');
     existingCalls.unshift(webhookCall);
     sessionStorage.setItem('debug_webhook_calls', JSON.stringify(existingCalls.slice(0, 50)));
-
-    if (!response.ok) {
-      console.error('Webhook returned non-200:', response.status);
-      return { status: 'ERROR' };
-    }
-
-    // Parse the response (which is a string like "OK {granted:[77,73]}")
-    const result = parseWebhookResponse(typeof responseData === 'string' ? responseData : JSON.stringify(responseData));
-    return result;
   } catch (error) {
-    console.error('Webhook error:', error);
+    console.error('Legacy webhook error:', error);
     
     // Store error in debug panel
     const webhookCall = {
       timestamp: new Date().toLocaleString(),
       endpoint: webhooksConfig.claim_reward_webhook,
-      request: requestData,
+      request: { tg_id, lang, clicked_at },
       response: null,
       status: 0,
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -140,9 +130,95 @@ export const callRedeemAPI = async (
     const existingCalls = JSON.parse(sessionStorage.getItem('debug_webhook_calls') || '[]');
     existingCalls.unshift(webhookCall);
     sessionStorage.setItem('debug_webhook_calls', JSON.stringify(existingCalls.slice(0, 50)));
+  }
+};
+
+/**
+ * Call new redeem API
+ */
+const callNewRedeemAPI = async (
+  tg_id: string,
+  lang: string,
+  clicked_at: string
+): Promise<RedeemResult> => {
+  const requestData = { tg_id, lang, clicked_at };
+  const apiUrl = 'https://dev-api-app-zodiark.blackmouthgames.com/v1/redeem/campaign';
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+      signal: AbortSignal.timeout(10000), // 10s timeout
+    });
+
+    const responseData = await response.json();
+    
+    // Store API call for debug panel
+    const apiCall = {
+      timestamp: new Date().toLocaleString(),
+      endpoint: apiUrl,
+      request: requestData,
+      response: responseData,
+      status: response.status,
+    };
+    
+    const existingCalls = JSON.parse(sessionStorage.getItem('debug_webhook_calls') || '[]');
+    existingCalls.unshift(apiCall);
+    sessionStorage.setItem('debug_webhook_calls', JSON.stringify(existingCalls.slice(0, 50)));
+
+    if (!response.ok) {
+      console.error('New API returned non-200:', response.status);
+      return { status: 'ERROR' };
+    }
+
+    // Parse the response from the "result" field
+    if (responseData && responseData.result) {
+      const result = parseWebhookResponse(responseData.result);
+      return result;
+    }
+
+    return { status: 'ERROR' };
+  } catch (error) {
+    console.error('New API error:', error);
+    
+    // Store error in debug panel
+    const apiCall = {
+      timestamp: new Date().toLocaleString(),
+      endpoint: apiUrl,
+      request: requestData,
+      response: null,
+      status: 0,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+    
+    const existingCalls = JSON.parse(sessionStorage.getItem('debug_webhook_calls') || '[]');
+    existingCalls.unshift(apiCall);
+    sessionStorage.setItem('debug_webhook_calls', JSON.stringify(existingCalls.slice(0, 50)));
     
     return { status: 'ERROR' };
   }
+};
+
+/**
+ * Call claim reward API
+ * Calls both legacy webhook and new API, but only returns result from new API
+ */
+export const callRedeemAPI = async (
+  tg_id: string,
+  lang: string
+): Promise<RedeemResult> => {
+  const clicked_at = new Date().toISOString();
+
+  // Call legacy webhook in background (don't await, don't use result)
+  callLegacyWebhook(tg_id, lang, clicked_at).catch(err => 
+    console.warn('Legacy webhook failed (ignored):', err)
+  );
+
+  // Call new API and return its result
+  return callNewRedeemAPI(tg_id, lang, clicked_at);
 };
 
 /**
