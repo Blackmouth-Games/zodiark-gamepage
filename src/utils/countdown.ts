@@ -14,17 +14,17 @@ export interface CountdownTime {
 }
 
 /**
- * Get target launch date: October 17, 2025 at 14:55 Madrid time
+ * Get target launch date: October 17, 2025 at 14:59 Madrid time
  */
 export const getTargetDate = (): DateTime => {
-  // Target: October 17, 2025 at 14:55 Madrid time
+  // Target: October 17, 2025 at 14:59 Madrid time
   return DateTime.fromObject(
     {
       year: 2025,
       month: 10,
       day: 17,
       hour: 14,
-      minute: 55,
+      minute: 59,
       second: 0,
       millisecond: 0,
     },
